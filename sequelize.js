@@ -18,21 +18,22 @@ const sequelize = new Sequelize('stock', 'root', '', {
 const TypeUser = TypeUserModel(sequelize,Sequelize);
 const Users = UserModel(sequelize,Sequelize);
 const Chefs = ChefsModel(sequelize,Sequelize);
-const BL = BLModel(sequelize,Sequelize);
+const Bon_Livraison = BLModel(sequelize,Sequelize);
 const BL_Content = BL_ContentModel(sequelize,Sequelize);
 const Composants = ComposantModel(sequelize,Sequelize);
 const Etudiants = EtudiantModel(sequelize,Sequelize);
 const Groups = GroupModel(sequelize,Sequelize);
 
 BL_Content.belongsTo(Composants)
-BL_Content.belongsTo(BL)
+BL_Content.belongsTo(Bon_Livraison)
 Composants.hasMany(BL_Content)
-BL.hasMany(BL_Content)
+Bon_Livraison.hasMany(BL_Content)
 Etudiants.belongsTo(Groups)
 Groups.hasMany(Etudiants)
 Chefs.belongsTo(Etudiants)
 Chefs.belongsTo(Groups)
-TypeUser.hasMany(Users)
+//TypeUser.hasMany(Users)
+Users.belongsTo(TypeUser)
 sequelize.sync({ force: false })
     .then(() => {
         console.log(" database init")
@@ -40,5 +41,5 @@ sequelize.sync({ force: false })
  
 
 module.exports = {
-    TypeUser, Users,Chefs,Composants,Etudiants,Groups,BL_Content,BL
+    TypeUser, Users,Bon_Livraison,Chefs,Composants,Etudiants,Groups,BL_Content
 };

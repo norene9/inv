@@ -11,6 +11,6 @@ module.exports = (sequelize, type) => {
         lastName :type.STRING,
         email: type.STRING,
         password : type.STRING,
-        type : type.STRING
+    
     })
 };

@@ -29,6 +29,9 @@ app.get('/Add_Eq', (request, response) => {
 app.get('/Add_User', (request, response) => {
   response.render('Add_User')
 })
+app.get('/BL', (request, response) => {
+  response.render('BL')
+})
 
 
 //Listing to the server
