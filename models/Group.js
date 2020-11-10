@@ -1,6 +1,6 @@
 
 module.exports = (sequelize, type) => {
-    return sequelize.define('groups', {
+    return sequelize.define('Groups', {
 
         id: {
             type: type.INTEGER,

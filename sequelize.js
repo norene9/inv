@@ -7,14 +7,15 @@ const BL_ContentModel  = require('./models/BL_Content');
 const ComposantModel  = require('./models/Composant');
 const EtudiantModel  = require('./models/Etudiant');
 const GroupModel  = require('./models/Group');
-const TypeModel  = require('./models/Type_User');
+const TypeUserModel  = require('./models/Type_User');
+
 const sequelize = new Sequelize('stock', 'root', '', {
     host: 'localhost',
     dialect: 'mysql'
 });
 
 
-
+const TypeUser = TypeUserModel(sequelize,Sequelize);
 const Users = UserModel(sequelize,Sequelize);
 const Chefs = ChefsModel(sequelize,Sequelize);
 const BL = BLModel(sequelize,Sequelize);
@@ -31,6 +32,7 @@ Etudiants.belongsTo(Groups)
 Groups.hasMany(Etudiants)
 Chefs.belongsTo(Etudiants)
 Chefs.belongsTo(Groups)
+TypeUser.hasMany(Users)
 sequelize.sync({ force: false })
     .then(() => {
         console.log(" database init")
@@ -38,5 +40,5 @@ sequelize.sync({ force: false })
  
 
 module.exports = {
-   Users,Chefs,Composants,Etudiants,Groups,BL_Content,BL
+    TypeUser, Users,Chefs,Composants,Etudiants,Groups,BL_Content,BL
 };

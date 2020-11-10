@@ -26,6 +26,10 @@ app.get('/generic', (request, response) => {
 app.get('/Add_Eq', (request, response) => {
   response.render('Add_Eq')
 })
+app.get('/Add_User', (request, response) => {
+  response.render('Add_User')
+})
+
 
 //Listing to the server
 app.listen(8000, ()=>{
