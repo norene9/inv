@@ -1,1 +1,43 @@
-<%include header%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%include header%>
+  <title>Adding Componant</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="row">
+      </div>
+      <div class="row">
+        </div>
+        <div class="col-sm"><section id="ajout">
+            <h2>Ajouter Utilisateur</h2>
+            <form action="/Add_User" method="POST" >
+              <div class="form-group">
+                <label >Nom:</label>
+                <input type="text" class="form-control" name="nom">
+                <label >Prenom:</label>
+                <input type="text" class="form-control" name="prenom">
+                <label >Email:</label>
+                <input type="email" class="form-control" name="Email">
+              </div>
+              <div class="form-group">
+                
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+          </div>
+          </section></div>
+       
+      </div>
+  
+   
+
+
+</body>
+</html>
+
