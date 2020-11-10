@@ -1,0 +1,56 @@
+{
+  "name": "inventory",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "duplexer3": "^0.1.4",
+    "ee-first": "^1.1.1",
+    "emoji-regex": "^7.0.3",
+    "encodeurl": "^1.0.2",
+    "escape-html": "^1.0.3",
+    "esprima": "^4.0.1",
+    "etag": "^1.8.1",
+    "express": "^4.17.1",
+    "forwarded": "^0.1.2",
+    "fresh": "^0.5.2",
+    "fsevents": "^2.1.3",
+    "glob-parent": "^5.1.1",
+    "global-dirs": "^2.0.1",
+    "graceful-fs": "^4.2.4",
+    "has-flag": "^3.0.0",
+    "has-yarn": "^2.1.0",
+    "http-cache-semantics": "^4.1.0",
+    "ignore-by-default": "^1.0.1",
+    "import-lazy": "^2.1.0",
+    "imurmurhash": "^0.1.4",
+    "inflection": "^1.12.0",
+    "inherits": "^2.0.3",
+    "ini": "^1.3.5",
+    "ipaddr.js": "^1.9.1",
+    "is-binary-path": "^2.1.0",
+    "is-bluebird": "^1.0.2",
+    "is-ci": "^2.0.0",
+    "is-extglob": "^2.1.1",
+    "is-fullwidth-code-point": "^2.0.0",
+    "is-glob": "^4.0.1",
+    "is-npm": "^4.0.0",
+    "is-number": "^7.0.0",
+    "is-obj": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/norene9/Inventory.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/norene9/Inventory/issues"
+  },
+  "homepage": "https://github.com/norene9/Inventory#readme"
+}
