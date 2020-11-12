@@ -32,6 +32,9 @@ app.get('/Add_User', (request, response) => {
 app.get('/BL', (request, response) => {
   response.render('BL')
 })
+app.get('/Teachers', (request, response) => {
+  response.render('Teachers')
+})
 
 
 //Listing to the server

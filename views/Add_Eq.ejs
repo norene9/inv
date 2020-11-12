@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%include header%>
+  <%- include('header'); -%>
   <title>Adding Componant</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,27 +10,29 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="row">
-      </div>
+  <div class="container">
       <div class="row">
-        <div class="col-sm"> <table class="table">
+        <div class="col-sm"> 
+          <table class="table">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Composant</th>
+                <th scope="col">Designation</th>
                 <th scope="col">Quantite</th>
                 <th scope="col">Quantite Disponible</th>
                 <th scope="col">Suprrimer</th>
+                <th scop="col">Modifier</th>
               </tr>
             </thead>
             <tbody>
                 <% for (var i=0;i< composant.length;i++){%>
-                    <% if(composant[i].name!=="") {%>
+                 <% var j= composant[i].name%>  
               <tr>
                 <th scope="row"><%=i%></th>
                 <td><%=composant[i].name%> </td>
                 <td><%=composant[i].quantity%></td>
                 <td><%=composant[i].quantity_dispo%></td>
+                
                 <td>
                     <form action="/Delete_comp" method="POST">
                         <input type="text" hidden value="<%=composant[i].id%>" name="compid">
@@ -38,14 +40,49 @@
                         Suprrimer</button>
                 </form>
                 </td>
+                <td>
                 
+                  
+                  <!-- Trigger the modal with a button -->
+                  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#<%=j%>">Edit </button>
+                
+                 
+                
+                </td>
+                
+              
+               
               </tr>
+                <!-- Modal -->
+                <div class="modal fade" id="<%=j%>" role="dialog">
+                  <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5>Edit:<%=composant[i].name %></h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                      <form action="/Eq_Edit" method="POST">
+                      <div class="modal-body">
+                        
+                        <input type="text" name="id" value="<%=composant[i].id %>"hidden >
+                        <input type="text"  class="form-control" name="edit">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-default" >save</button>
+                      </div>
+                    </div>
+                  
+                  </div>
+                </form>
+                </div>
             
               <%}%>
-              <%}%> 
+            
             </tbody>
-          </table></div>
-        <div class="col-sm"><section id="ajout">
+          </table>
+        
+             </div>
+        <div class="col-sm">
             <h2>Ajouter Nouveau Materiel</h2>
             <form action="/Add_Eq" method="POST" >
               <div class="form-group">
@@ -57,11 +94,19 @@
               <button type="submit" class="btn btn-default">Submit</button>
             </form>
           </div>
-          </section></div>
+        
+          
        
       </div>
+      </div>
   
-   
+   <scripT>
+     $(document).ready(function(){
+       $(form).on('submit',function(){
+         location.reload();
+       })
+     })
+   </scripT>
 
 
 </body>

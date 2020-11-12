@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('header'); -%>
+  <title>Adding Componant</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    
+   <div class="row" >
+    <div class="col-sm"> <table class="table table-dark" >
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Designation</th>
+            <th scope="col">quantite</th>
+            
+          </tr>
+        </thead>
+        <% for(var i=0;i< content.length;i++) {%>
+        <tbody>
+          <tr>
+            <th scope="row"><%=i%></th>
+            <td><%= content[i].composant.name%></td>
+            <td><%= content[i].cquantity%></td>
+            <td><button class="btn btn-danger"><a href="/delete_Con/<%= content[i].id%>">Suprimer</a></button></td>
+            
+          </tr>
+          <%}%>
+        
+        </tbody>
+      </table>
+    </div>
+       <div class="col-sm">
+           <div class="card text-black border-success mb-3" style="width: 50rem; margin-left: 0%;">
+            
+        <div class="card-header bg-dark" ></div>
+        <div class="card-body">
+          <h5 class="card-title">Numero de Bon:<%=BL.numero%></h5>
+          <h5 class="card-title">Date :<%=BL.date%></h5>
+          
+            <section id="ajout">
+            
+            <form action="/BL_cont/<%=BL.id%>" method="POST" >
+              <!---<div class="form-group">
+                
+                <label >type:</label>
+                <input type="text" class="form-control" name="type">
+              </div>--->
+             
+              <label >quantite</label>
+              <input type="text" class="form-control" name="quantite">
+              
+              <label for="inputState">Type</label>
+              <select id="inputState" class="form-control" name='type'>
+                <option selected>Choose...</option>
+                <% for (var i=0;i< cmp.length;i++){%>
+                    <% if(cmp[i].name!=="") {%>
+                <option style="color: black;"><%= cmp[i].name%></option>
+                <%}%>
+                       
+                        <% }%> 
+              </select>
+              
+                
+              <button type="submit" class="btn btn-info" >Submit</button>
+            </form>
+          
+
+
+        
+   
+        </div>
+      </div>
+    </div>
+      
+   </div>      
+   
+   <script>
+    $(document).ready(function(){
+      $(form).on('submit',function(){
+        location.reload();
+      })
+    })
+  </script>      
+              
+                
+                
+        </body>
+</html>

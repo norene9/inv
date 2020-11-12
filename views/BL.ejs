@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%include header%>
+    <%- include('header'); -%>
   <title>Adding Componant</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,6 +22,7 @@
                 <th scope="col">Date</th>
                 <th scope="col">Ajouter Contenu</th>
                 <th scope="col">Suprrimer</th>
+                <th scope="col">details</th>
               </tr>
             </thead>
             <tbody>
@@ -32,20 +33,24 @@
                 <td><%=BL[i].numero%> </td>
                 <td><%=BL[i].date%></td>
                 <td> </form>
-                    <form action="/Ajo_contenu" method="POST">
+                    <form action="/BL_Cont/<%=BL[i].id%>" method="POST">
                         <input type="text" hidden value="<%=BL[i].id%>" name="idBL">
-                    <button type="submit"class="btn btn-primary">
-                       <a href="BL/<%=BL[i].id%>"> Details</a></button>
-                </form></td>
-                <td>
-                    <form action="/Delete_BL" method="POST">
-                        <input type="text" hidden value="<%=BL[i].id%>" name="idBL">
-                    <button type="submit"class="btn btn-danger">
-                        Suprrimer</button>
-                        </form>
+                    <button class="btn btn-primary">
+                       <a href="BL_Cont/<%=BL[i].id%>" style="color:white;"> Update</a></button>
+               </form>
+              </td>
+              <td> </form>
+                <form action="/BL_details/<%=BL[i].id%>" method="POST">
+                    <input type="text" hidden value="<%=BL[i].id%>" name="idBL">
+                <button class="btn btn-info">
+                   <a href="BL_details/<%=BL[i].id%>" style="color:white;"> Details</a></button>
+           </form>
+          </td>
+             
+                  <td><a href='delete/<%=BL[i].id%>'><button class="btn btn-danger">delete</button></a></td>
                
-                </td>
                 
+               
               </tr>
             
               <%}%>

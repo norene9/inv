@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('header'); -%>
+  <title>Adding Componant</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+   
+    
+   <div class="row" >
+    <div class="card" style="width: 70%; margin-left: auto;
+    margin-right: auto; ">
+        <div class="card-header">
+            <h5 class="card-title" style="text-align:center;">Bon de livraison details</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <h4>Numero</h4>
+                    <h4>Date</h4>
+                </div>
+                <div class="col">
+                    <h4>Numero</h4>
+                    <h4>Date</h4> 
+                </div>
+            </div>
+          <h5 class="card-title" style="text-align:center;">Bon de livraison details</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <table class="table table-dark" >
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Designation</th>
+                <th scope="col">quantite</th>
+                
+              </tr>
+            </thead>
+            <% for(var i=0;i< content.length;i++) {%>
+            <tbody>
+              <tr>
+                <th scope="row"><%=i%></th>
+                <td><%= content[i].composant.name%></td>
+                <td><%= content[i].cquantity%></td>
+                <td><button class="btn btn-danger"><a href="/delete_Con/<%= content[i].id%>">Suprimer</a></button></td>
+                
+              </tr>
+              <%}%>
+            
+            </tbody>
+          </table>
+          
+        </div>
+      </div>
+  
+    
+      
+   </div>      
+   
+      
+              
+         

@@ -7,7 +7,8 @@ module.exports = (sequelize, type) => {
             primaryKey: true,
             autoIncrement: true
         },
-        quantity: type.INTEGER,
+        cquantity:{type:type.INTEGER,
+        dfaultValue:'0',}
        
     })
 };
