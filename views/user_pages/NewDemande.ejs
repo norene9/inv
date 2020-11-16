@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('header'); -%>
+  <title>Adding Componant</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header bg-dark">
+                   
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">2CPI</h5>
+                  <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#2CPI">Nouveau Demande</a>
+                </div>
+              </div>
+          </div>
+          <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header bg-dark">
+                   
+                  </div>
+                <div class="card-body">
+                  <h5 class="card-title">2CS</h5>
+               
+                  <a href="#" class="btn btn-primary"data-toggle="modal" data-target="#2CS">Nouveau Demande</a>
+                </div>
+              </div>
+          </div>
+          <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header bg-dark">
+                   
+                </div>
+     
+                <div class="card-body">
+                  <h5 class="card-title">3Cs</h5>
+                  
+                  <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#3CS">Nouveau Demande</a>
+                </div>
+              
+          </div>
+        </div>
+      </div>
+      <!-----------------------------------2CPI Modal----------->
+      <div class="modal fade" id="2CPI" role="dialog">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5> Nouveau Demande :  </h5>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+            
+            <div class="modal-body">
+                <form action="/Ajout" method="POST" >
+                    <input type="text" name="tajout" value="groupe">
+                    <label for="inputState">Type</label>
+                    <select id="inputState" class="form-control" name='numero'>
+                      <option selected>Groupe...</option>
+                      <% for (var i=0;i< groupe.length;i++){%>
+                          <% if(groupe[i].promo.promo=="2CPI") {%>
+                      <option style="color: black;"><%= groupe[i].numero%></option>
+                      <%}%>
+                             
+                              <% }%> 
+                    </select>
+                    <input type="text" value="<%=promo2CPI.id%>" name="promo">
+                    
+                    <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#componant">Submit</button>
+                  </form>
+                  
+            </div>
+          </div>
+        
+        </div>
+      
+      </div>
+       <!-----------------------------------2Cs Modal----------->
+       <div class="modal fade" id="2CS" role="dialog">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5> Nouveau Demande :  </h5>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+            
+            <div class="modal-body">
+                <form action="/Ajout" method="POST" >
+                    <input type="text" name="tajout" value="groupe">
+                    <label for="inputState">Type</label>
+                    <select id="inputState" class="form-control" name='numero'>
+                      <option selected>Groupe...</option>
+                      <% for (var i=0;i< groupe.length;i++){%>
+                          <% if(groupe[i].promo.promo=="2CS") {%>
+                      <option style="color: black;"><%= groupe[i].numero%></option>
+                      <%}%>
+                             
+                              <% }%> 
+                    </select>
+                    <input type="text" value="<%= promo2CS.id%>" name="promo">
+                    
+                    <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#componant">Submit</button>
+                  </form>
+                  
+            </div>
+          </div>
+        
+        </div>
+      
+      </div>
+      <!-----------------------------------3CS Modal----------->
+      <div class="modal fade" id="3CS" role="dialog">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5> Nouveau Demande :  </h5>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+            
+            <div class="modal-body">
+                <form action="/Ajout" method="POST" >
+                    <input type="text" name="tajout" value="groupe">
+                    <label for="inputState">Type</label>
+                    <select id="inputState" class="form-control" name='numero'>
+                      <option selected>Groupe...</option>
+                      <% for (var i=0;i< groupe.length;i++){%>
+                          <% if(groupe[i].promo.promo=="3CS") {%>
+                            
+                      <option style="color: black;"><%= groupe[i].numero%></option>
+                      <%}%>
+                             
+                              <% }%> 
+                    </select>
+                    <input type="text" value="<%= promo3CS.id%>" name="promo">
+                    <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#componant">Submit</button>
+                  </form>
+                  
+            </div>
+          </div>
+        
+        </div>
+      
+      </div>
+ 
+        
+        
+
+          
+
+
+
+
+</body>
+</html>

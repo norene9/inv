@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('header'); -%>
+  <title>Adding Componant</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    
+</head>
+<body>
+   
+      <!-----------------------------------2CPI Modal----------->
+      <div class="modal fade" id="2CPI" role="dialog">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5> Nouveau Demande :  </h5>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+            
+            <div class="modal-body">
+                <form action="/Ajout" method="POST" >
+                    <input type="text" name="tajout" value="groupe">
+                    <label for="inputState">Type</label>
+                    <select id="inputState" class="form-control" name='numero'>
+                      <option selected>Groupe...</option>
+                      <% for (var i=0;i< groupe.length;i++){%>
+                          <% if(groupe[i].promo.promo=="2CPI") {%>
+                      <option style="color: black;"><%= groupe[i].numero%></option>
+                      <%}%>
+                             
+                              <% }%> 
+                    </select>
+                    <input type="text" value="<%= groupe[0].promoId%>" name="promo">
+                    <input type="text"  class="form-control" name='bc' value="<%=bcn%>">
+                    <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#componant">Submit</button>
+                  </form>
+                  
+            </div>
+          </div>
+        
+        </div>
+      
+      </div>
+       <!-----------------------------------2Cs Modal----------->
+       <div class="modal fade" id="2CS" role="dialog">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5> Nouveau Demande :  </h5>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+            
+            <div class="modal-body">
+                <form action="/Ajout" method="POST" >
+                    <input type="text" name="tajout" value="groupe">
+                    <label for="inputState">Type</label>
+                    <select id="inputState" class="form-control" name='numero'>
+                      <option selected>Groupe...</option>
+                      <% for (var i=0;i< groupe.length;i++){%>
+                          <% if(groupe[i].promo.promo=="2CS") {%>
+                      <option style="color: black;"><%= groupe[i].numero%></option>
+                      <%}%>
+                             
+                              <% }%> 
+                    </select>
+                    
+                    <input type="text"  class="form-control" name='bc' value="<%=bcn%>">
+                    <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#componant">Submit</button>
+                  </form>
+                  
+            </div>
+          </div>
+        
+        </div>
+      
+      </div>
+      <!-----------------------------------3CS Modal----------->
+      <div class="modal fade" id="3CS" role="dialog">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5> Nouveau Demande :  </h5>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+            
+            <div class="modal-body">
+                <form action="/Ajout" method="POST" >
+                    <input type="text" name="tajout" value="groupe">
+                    <label for="inputState">Type</label>
+                    <select id="inputState" class="form-control" name='numero'>
+                      <option selected>Groupe...</option>
+                      <% for (var i=0;i< groupe.length;i++){%>
+                          <% if(groupe[i].promo.promo=="3CS") {%>
+                      <option style="color: black;"><%= groupe[i].numero%></option>
+                      <%}%>
+                             
+                              <% }%> 
+                    </select>
+                    
+                    <input type="text"  class="form-control" name='bc' value="<%=bcn%>">
+                    <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#componant">Submit</button>
+                  </form>
+                  
+            </div>
+          </div>
+        
+        </div>
+      
+      </div>
+  <div class="container">
+    <div class="card text-center">
+        <div class="card-header" style="background-color: cornflowerblue;">
+         <div class="container" >
+             <div class="row">
+                 <div class="col">
+                    <% if (bc.teamId!==null){%>
+           
+                        <div class="flip-card"  style="background-color:#5066a5 ;">
+                            <div class="flip-card-inner">
+                              <div class="flip-card-front"style="background-color:  #2980b9;">
+                                <h4 style="margin-top: 50%;background:white;">Cliquer pour ajouter plus de detail</h4>
+                              </div>
+                              
+                              <div class="flip-card-back">
+                                <form action="/Ajout" method="POST" >
+                                    <input type="text"  class="form-control" name='tajout' value="bcon" hidden>
+                                    
+                                    <label for="inputState">Type</label>
+                                    <select id="inputState" class="form-control" name='composant'>
+                                      <option selected>material...</option>
+                                      <% for (var i=0;i< composant.length;i++){%>
+                                          <% if(composant[i].name!=="") {%>
+                                      <option style="color: black;"><%= composant[i].name%></option>
+                                      <%}%>
+                                             
+                                              <% }%> 
+                                    </select>
+                                    <label>Quantite</label>
+                                    <input type="text"  class="form-control" name='quantite' >
+                                    <input type="text"  class="form-control" name='bc' value="<%=bcn%>" hidden>
+                                    <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#componant">Submit</button>
+                                  </form>
+                              </div>
+                             
+                            </div>
+                          </div>
+                          <%}%>
+                 </div>
+                 <div class="col">
+                    <div class="outer">
+
+                        <table class="table table-hover bg-light">
+                          <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Designation</th>
+                              <th scope="col">quantite</th>
+                              <th scope="col">edit</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+            
+                            <% for(var i=0;i< content.length;i++) {%>
+                              <% var j= content[i].composant.name%>  
+                              <tr>
+                                <td><%=i%></td>
+                                <td><%= content[i].composant.name%></td>
+                                <td><%= content[i].quantity%></td>
+                                <td><button class="btn btn-danger">
+                                  <a href="/delete_Con_bc/<%= content[i].id%>" style="color: cornsilk;">
+                                    <i class="fa fa-trash"></i></a></td>
+                                <td> <a class="btn btn-success" data-toggle="modal" data-target="#<%=j%>">
+                                    <i class="fa fa-edit"></i>
+                                  </a>
+                                </td>
+                                
+                              </tr>
+                              <div class="modal fade" id="<%=j%>" role="dialog">
+                                <div class="modal-dialog modal-sm">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5> Edit Quantite :  <%=j%></h5>
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                    <form action="/Edit_bc" method="POST">
+                                    <div class="modal-body">
+                                      
+                                      <input type="text" name="id" value="<%=content[i].id %>"hidden >
+                                      <input type="text"  class="form-control" name="edit">
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="submit" class="btn btn-default" >save</button>
+                                    </div>
+                                  </div>
+                                
+                                </div>
+                              </form>
+                              </div>
+                              <% }%> 
+            
+                                              
+                                                
+                                
+            
+                              
+            
+                                          </tbody>
+                        </table>
+                      </div>
+
+                 </div>
+             </div>
+         </div>
+        </div>
+        
+        
+
+          
+
+          
+      <style>
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 300px;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+.flip-card-back {
+  background-color: #2980b9;
+  color: white;
+  transform: rotateY(180deg);
+}
+</style>
+
+
+</body>
+</html>

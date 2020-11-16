@@ -1,34 +1,131 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <title>Bootstrap Example</title>
   <%- include('header'); -%>
-</head>
-<body>
-<div class="card">
- 
-  <div class="card-body">
-    <h5 class="card-title" style="margin-left: 50%;">Special title treatment</h5>
-   
-    <a href="Add_User" class="btn btn-primary" style="margin-left: 50%;" >ADD TEACHER</a>
-  </div>
-</div>
-<h3 style="margin-left: 50%;">TEACHERS LIST</h3>
-<% for (var i=0;i< use.length;i++){%>
-  <% if(use[i].firstName!=="") {%>
-<div class="card" style="width:400px">
-    <div class="card-body">
-      <h4 class="card-title">Teacher</h4>
-      <p class="card-text"><%=use[i].firstName%></p>
-      <a href="#" class="btn btn-primary">Voir Details</a>
-    </div>
-   
-  </div>
-  <%}%>
-              <%}%> 
-</div>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+  body {
+    position: relative;
+  }
+  ul.nav-pills {
+    margin-top: 50px;
+    position: fixed;
+  }
+  div.col-8 div {
+    height: 500px;
+  }
+  div.ex1 {
 
+  width: 800px;
+  overflow-x: hidden;
+}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#myScrollspy" data-offset="1">
+
+<div class="container-fluid" style="margin-left: 20px;">
+  <div class="row">
+   
+     
+    <div class="col-sm ">
+      <div id="section1" class="bg" style="height: 200px;">    
+        <h1>Admins</h1>
+        <div class="ex1">
+         
+            <div class="row">
+              <% for (var i=0;i< user.length;i++){%>
+                
+              <div class="col-md-4" style="padding-right:0;padding-left:0;" >
+                <% if (user[i].type_user.typeu=="Admin"){%>
+                <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text"><%=user[i].firstName%>.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                  </div>
+                </div>
+              </div>
+              <%}%>
+              <%}%>
+            </div>
+          
+         
+         
+         
+        
+       
+      </div>
+      <div id="section2" class="bg"> 
+        <h1>Enseignats</h1>
+        <div class="ex1">
+         
+          <div class="row">
+            <% for (var i=0;i< user.length;i++){%>
+             
+             
+            <div class="col-md-4" style="padding-right:0;padding-left:0;" >
+              <% if (user[i].type_user.typeu=="Enseignant"){%>
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text"><%=user[i].firstName%>.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+            <%}%>
+            <%}%>
+          </div>
+        
+       
+       
+       
+      
+     
+    </div>
+        
+      </div>        
+      <div id="section3" class="bg">         
+        <h1>Consultateur</h1>  <div class="ex1">
+         
+          <div class="row">
+            <% for (var i=0;i< user.length;i++){%>
+              
+            <div class="col-md-4" style="padding-right:0;padding-left:0;" >
+              <% if (user[i].type_user.typeu=="Consultateur"){%>
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text"><%=user[i].firstName%>.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+            <%}%>
+            <%}%>
+          </div>
+        
+       
+       
+       
+      
+     
+    </div>
+      </div>
+           
+      
+    </div>
+  </div>
+</div>
+</div>
 
 </body>
 </html>
+
   

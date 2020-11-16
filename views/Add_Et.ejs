@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('header'); -%>
+  <title>Adding Componant</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    
+</head>
+<body>
+  <h4 style="margin-left: 5%;">Liste des Groupes</h4>
+  <div class="row" style="width: 10px; margin-left: 5%;">
+   
+  <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+    
+    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">2CPI</a>
+    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">2CS</a>
+    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">3CS</a>
+    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+  </div>
+  <div class="tab-content" id="v-pills-tabContent">
+    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>
+    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
+    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+  </div>
+</div>
+   <div class="row" >
+   
+  
+       
+           <div class="card text-black border-success mb-3" style="width: 90rem; margin-left: auto; margin-right: auto;">
+            
+        <div class="card-header bg-dark"  style="color: white;">Ajouter Le contenu du BL</div>
+        <div class="card-body">
+            
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm">
+                        <label >Chef:</label>
+                      
+                      </div>
+                      <div class="col-sm">
+                          <form action="/Add_chef" method="POST">
+                            <label >Nom:</label>
+                            <input type="text" class="form-control" name="c_nom" >
+                          </div>
+                          <div class="col-sm">
+                            <label >Prenom:</label>
+                            <input type="text" class="form-control" name="c_prenom" >
+                          </div>
+                          <div class="col-sm">
+                            <label >email:</label>
+                      <input type="email" class="form-control" name="c_email" >
+                          </div>
+                          <div class="col-sm">
+                            <input type="text" class="form-control" name="groupId"  value="<%=group.id%>" hidden>
+                          <button type="submit" class="btn btn-default">Submit</button>
+                          </form>
+
+                        
+                 
+                      </div>
+                      <div class="col-sm"></div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col-sm">
+                        <label >Membre:</label>
+                       
+                            <div class="col-sm">
+                                <form action="/Add_membre" method="POST">
+                                <label >Nom:</label>
+                                <input type="text" class="form-control" name="m_nom" >
+                              </div>
+                              <div class="col-sm">
+                                <label >Prenom:</label>
+                                <input type="text" class="form-control" name="m_prenom" >
+                              </div>
+                              <div class="col-sm">
+                                <label >email:</label>
+                          <input type="email" class="form-control" name="m_email" >
+                              </div>
+                              <div class="col-sm">
+                                <input type="text" class="form-control" name="groupId" value="<%=group.id%>" hidden>
+                              <button type="submit" class="btn btn-default">Submit</button>
+                              </div>
+                        </form>
+                       
+                      
+                      </div>
+                   
+                      <div class="col-sm">
+                          <div class="container">
+                              <div class="row">
+                                  <div class="col-sm">
+                                    <% if(chef!==null) {%>
+                                        <% if(chef.etudiant!==null) {%>
+                                          chef: <%=chef.etudiant.firstName%><br><%=chef.etudiant.lastName%>
+                                          <% }%> 
+                                          <% }%> 
+                                  </div>
+                                  <div class="col-sm">
+
+                                  </div>
+                              </div>
+                          </div>
+                       
+                          
+                        <div class="outer">
+
+                            <table class="table table-hover bg-light">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Nom</th>
+                                  <th scope="col">Prenom</th>
+                                  <th scope="col">Email</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                
+                                <% for(var i=0;i< etudiant.length;i++) {%>
+                                    <% if(etudiant[i].firstname!=="") {%>
+                                        <% var j= etudiant[i].firstName%>  
+                                  <tr>
+                                    <td><%=i%></td>
+                                    <td><%= etudiant[i].firstName%></td>
+                                    <td><%= etudiant[i].lastName%></td>
+                                    <td><%= etudiant[i].email%></td>
+            
+                                    <td><button class="btn btn-danger">
+                                      <a href="/delete_etu/<%= etudiant[i].id%>" style="color: cornsilk;">
+                                        <i class="fa fa-trash"></i></a></td>
+                                    <td> <a class="btn btn-success" data-toggle="modal" data-target="#<%=j%>">
+                                        <i class="fa fa-edit"></i>
+                                      </a>
+                                    </td>
+                                    
+                                  </tr>
+                                  <div class="modal fade" id="<%=j%>" role="dialog">
+                                    <div class="modal-dialog modal-sm">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-sm">
+                                                        <h5> Etudiant: </h5>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <h5><%=etudiant[i].firstName%>  </h5>   
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5><%=etudiant[i].lastName%></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                          
+                                         
+                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                        <form action="/Et_Edit" method="POST">
+                                        <div class="modal-body">
+                                          
+                                          <input type="text" name="id" value="<%=etudiant[i].id%>"hidden >
+                                          <label>Nom</label>
+                                          <input type="text"  class="form-control" name="name">
+                                          <label>Prenom</label>
+                                          <input type="text"  class="form-control" name="lname">
+                                          <label>Email</label>
+                                          <input type="text"  class="form-control" name="email">
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="submit" class="btn btn-default" >save</button>
+                                        </div>
+                                      </div>
+                                    
+                                    </div>
+                                  </form>
+                                  </div>
+                                  <% }%> 
+                                  <% }%> 
+                                                  
+                                                    
+                                    
+                
+                                  
+                
+                                              </tbody>
+                            </table>
+                          </div>
+                      </div>
+                  </div>
+                 
+                 
+                </div>
+              
+               
+                  
+                
+              </form>
+          <h5 class="card-title"></h5>
+          <h5 class="card-title"></h5>
+          
+          
+        
+
+
+
+
+          
+
+     
+
+
+
+
+    </div>
+
+  </div>
+
+</div> 
+   
+        </div>
+      </div>
+   
+      
+   </div>      
+   
+      
+              
+                
+                
+        </body>
+</html>

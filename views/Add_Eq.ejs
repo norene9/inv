@@ -13,6 +13,7 @@
   <div class="container">
       <div class="row">
         <div class="col-sm"> 
+          <div class="outer">
           <table class="table">
             <thead class="thead-dark">
               <tr>
@@ -80,7 +81,7 @@
             
             </tbody>
           </table>
-        
+        </div>
              </div>
         <div class="col-sm">
             <h2>Ajouter Nouveau Materiel</h2>
@@ -100,13 +101,27 @@
       </div>
       </div>
   
-   <scripT>
-     $(document).ready(function(){
-       $(form).on('submit',function(){
-         location.reload();
-       })
-     })
-   </scripT>
+      <style>
+
+
+
+
+        .outer {
+            overflow-y: auto;
+            height: 300px;
+          }
+        
+          .outer {
+            width: 100%;
+            -layout: fixed;
+          }
+        
+          .outer th {
+            text-align: left;
+            top: 0;
+            position: sticky;
+            background-color: white;
+          }</style>
 
 
 </body>

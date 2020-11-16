@@ -12,37 +12,17 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    
 </head>
 <body>
     
    <div class="row" >
-    <div class="col-sm"> <table class="table table-dark" >
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Designation</th>
-            <th scope="col">quantite</th>
+    
+       
+      <div class="card text-black border-success mb-3" style="width: 90rem; margin-left: auto; margin-right: auto;">
             
-          </tr>
-        </thead>
-        <% for(var i=0;i< content.length;i++) {%>
-        <tbody>
-          <tr>
-            <th scope="row"><%=i%></th>
-            <td><%= content[i].composant.name%></td>
-            <td><%= content[i].cquantity%></td>
-            <td><button class="btn btn-danger"><a href="/delete_Con/<%= content[i].id%>">Suprimer</a></button></td>
-            
-          </tr>
-          <%}%>
-        
-        </tbody>
-      </table>
-    </div>
-       <div class="col-sm">
-           <div class="card text-black border-success mb-3" style="width: 50rem; margin-left: 0%;">
-            
-        <div class="card-header bg-dark" ></div>
+        <div class="card-header bg-dark"  style="color: white;">Ajouter Le contenu du BL</div>
         <div class="card-body">
           <h5 class="card-title">Numero de Bon:<%=BL.numero%></h5>
           <h5 class="card-title">Date :<%=BL.date%></h5>
@@ -50,14 +30,6 @@
             <section id="ajout">
             
             <form action="/BL_cont/<%=BL.id%>" method="POST" >
-              <!---<div class="form-group">
-                
-                <label >type:</label>
-                <input type="text" class="form-control" name="type">
-              </div>--->
-             
-              <label >quantite</label>
-              <input type="text" class="form-control" name="quantite">
               
               <label for="inputState">Type</label>
               <select id="inputState" class="form-control" name='type'>
@@ -69,28 +41,123 @@
                        
                         <% }%> 
               </select>
-              
+              <label >quantite</label>
+              <input type="text" class="form-control" name="quantite">
                 
               <button type="submit" class="btn btn-info" >Submit</button>
             </form>
           
+<style>
 
 
-        
+
+
+.outer {
+    overflow-y: auto;
+    height: 300px;
+  }
+
+  .outer {
+    width: 100%;
+    -layout: fixed;
+  }
+
+  .outer th {
+    text-align: left;
+    top: 0;
+    position: sticky;
+    background-color: white;
+  }</style>
+            
+       
+<div class="container-fluid col-md">
+  <div class="row">
+
+    <div class="col-lg-12">
+
+   
+        <div class="card-body">
+          <div class="outer">
+
+            <table class="table table-hover bg-light">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Designation</th>
+                  <th scope="col">quantite</th>
+                  <th scope="col">edit</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <% for(var i=0;i< content.length;i++) {%>
+                  <% var j= content[i].composant.name%>  
+                  <tr>
+                    <td><%=i%></td>
+                    <td><%= content[i].composant.name%></td>
+                    <td><%= content[i].cquantity%></td>
+                    <td><button class="btn btn-danger">
+                      <a href="/delete_Con/<%= content[i].id%>" style="color: cornsilk;">
+                        <i class="fa fa-trash"></i></a></td>
+                    <td> <a class="btn btn-success" data-toggle="modal" data-target="#<%=j%>">
+                        <i class="fa fa-edit"></i>
+                      </a>
+                    </td>
+                    
+                  </tr>
+                  <div class="modal fade" id="<%=j%>" role="dialog">
+                    <div class="modal-dialog modal-sm">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5> Edit Quantite :  <%=j%></h5>
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                        <form action="/BL_con_Edit" method="POST">
+                        <div class="modal-body">
+                          
+                          <input type="text" name="id" value="<%=content[i].id %>"hidden >
+                          <input type="text"  class="form-control" name="edit">
+                        </div>
+                        <div class="modal-footer">
+                          <button type="submit" class="btn btn-default" >save</button>
+                        </div>
+                      </div>
+                    
+                    </div>
+                  </form>
+                  </div>
+                  <% }%> 
+
+                                  
+                                    
+                    
+
+                  
+
+                              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+     
+
+
+
+
+    </div>
+
+  </div>
+
+</div> 
    
         </div>
       </div>
-    </div>
+   
       
    </div>      
    
-   <script>
-    $(document).ready(function(){
-      $(form).on('submit',function(){
-        location.reload();
-      })
-    })
-  </script>      
+      
               
                 
                 
