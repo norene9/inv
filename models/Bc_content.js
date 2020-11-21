@@ -7,6 +7,7 @@ module.exports=(sequelize,type)=>{
             autoIncrement:true,
             primaryKey:true,
         },
-        quantity:type.STRING
+        quantity:type.STRING,
+        
     })
 }

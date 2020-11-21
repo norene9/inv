@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>                           M</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="user.css">
 </head>
 <body>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav class="navbar navbar-expand-sm sticky-top" style="background-color:#628B8B;">
   <!-- Brand -->
-  <a class="navbar-brand" href="#">Logo</a>
+  <a class="navbar-brand" href="#"> <img src="images/logo.png" width="80px" height="80px" style="background-color: white;"></a>
 
   <!-- Links -->
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="index">Home</a>
+      <a class="nav-link" href="index" style="color: black;"><b>Home</b></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Demande</a>
+      <a class="nav-link" href="/liste_demande" style="color: black;"><b>Demande</b></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/etDette" style="color: black;"><b>Material Non Retourner</b></a>
     </li>
     
     <!-- Dropdown -->
     <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-        Groups
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" style="color: black;">
+        <b>Groups</b>
       </a>
       <div class="dropdown-menu">
         <a class="dropdown-item" href="/find_promo_1CPI">1CPI</a>
@@ -44,8 +48,8 @@
 
     <!-- Dropdown -->
     <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-        Users
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" style="color: black;">
+        <b> Users</b>
       </a>
       <div class="dropdown-menu">
         <a class="dropdown-item" href="/Teachers">Liste Utilisateur</a>
@@ -53,8 +57,8 @@
       </div>
     </li>
     <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-       Stock
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" style="color: black;">
+        <b>Stock</b>
       </a>
       <div class="dropdown-menu">
     
@@ -63,11 +67,22 @@
       
       </div>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/logout" style="color:black">  <b>Logout</b></a>
+    </li>
   </ul>
 </nav>
 <br>
   
 
 
+
+
+<div class="container">
+  <div class="row">
+     
+  </div>
+  <!--/row-->
+</div>
 </body>
 </html>

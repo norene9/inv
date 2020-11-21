@@ -1,112 +1,95 @@
 
 <!DOCTYPE html>
 <html lang="en">
+  
 <head>
-    <%- include('header'); -%>
+  <%- include('header'); -%> 
   <title>Adding Groupe</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/user.css">
+  
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     
 </head>
 <body>
-  <h3 style="margin-left: 30%;">Ajouter Les groupes de:<%=promo_2.promo%></h3>
+  <h3  style="font-family: Baskerville, serif;font-style: italic;text-align:center;">Ajouter Les groupes de:<%=promo_2.promo%></h3>
   <div class="container">
-   <div class="row" >
-    
-       <div class="col-md-3">
-        <form action="/Add_group" method="POST" >
-                
-               
-          <label >Numero</label>
-          <input type="text" class="form-control" name="numero">
-          
-          <input type="text" value="<%=promo_2.id%>" name="promo" hidden>
-            
-          <button type="submit" class="btn btn-info" >Submit</button>
-        </form>
-       </div>
-       
-   <div class="col-md-8" style="margin-left: 20%;">
-    <div class="outer">
-  <% if (group.length!==0){%>
-    <h5>Liste des groupe</h5>
-      <table class="table table-hover bg-light">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">numero de group</th>
-            
-            <th scope="col">edit</th>
-          </tr>
-        </thead>
-        <tbody>
-
-         <%for (var i=0;i< group.length;i++){%>
-          
-            <tr>
-              <td><%=i%></td>
-              <td><%=group[i].numero%></td>
-              <td></td>
-              <td><button class="btn btn-danger">
-                <a href="/del_gr/<%=group[i].id%>"  style="color: cornsilk;">
-                  <i class="fa fa-trash"  ></i></a></td>
-              <td> <a class="btn btn-success"  href="/Add_et/<%=group[i].id%>">
-                  <i class="fa fa-edit"></i>
-                </a>
-              </td>
+    <div class="row">
+      <div class="col-sm">
+        <div class="card">
+        
+          <div class="banner"></div>
+          <ul>
               
-            </tr>
-            <%}%>
-           
+              <li>Ajouter Groupe</li>
+  
+          </ul>
+          <button class="contact" id="main-button">cliquer</button>
          
-                            
-                              
-              
-
+          <form action="/Add_group" method="POST" class="email-form" >
             
-
-      </tbody>
-      </table>
-      <%}%>
+          <input type="text" placeholder="numero de groupe" class="form-control" name="numero">
+         
+          <input type="text" value="<%=promo_2.id%>" name="promo" hidden>
+          
+          <button type="submit" class="contact" >Submit</button>
+              
+        </form>
+        </div>
       </div>
+      <div class="col">
+        <div class="outer">
+          <% if (group.length!==0){%>
+            <h5>Liste des groupe</h5>
+              <table class="table table-hover bg-light">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">numero de group</th>
+                    
+                    <th scope="col">edit</th>
+                  </tr>
+                </thead>
+                <tbody>
+        
+                 <%for (var i=0;i< group.length;i++){%>
+                  
+                    <tr>
+                      <td><%=i%></td>
+                      <td><%=group[i].numero%></td>
+                      <td></td>
+                      <td><button class="btn btn-danger">
+                        <a href="/del_gr/<%=group[i].id%>"  style="color: cornsilk;">
+                          <i class="fa fa-trash"  ></i></a></td>
+                      <td> <a class="btn btn-success"  href="/Add_et/<%=group[i].id%>">
+                          <i class="fa fa-edit"></i>
+                        </a>
+                      </td>
+                      
+                    </tr>
+                    <%}%>
+                   
+                 
+                                    
+                                      
+                      
+        
+                    
+        
+              </tbody>
+              </table>
+              <%}%>
+              </div>
       </div>
-   </div>
+    </div>
+ 
       
 </div> 
      
 
-      
-              
+<script src="/user.js"></script>         
                 
                 
     </body>
-        <style>
-  
-  
-  
-  
-          .outer {
-              overflow-y: auto;
-              height: 300px;
-            }
-          
-            .outer {
-              width: 100%;
-              -layout: fixed;
-            }
-          
-            .outer th {
-              text-align: left;
-              top: 0;
-              position: sticky;
-              background-color: white;
-            }</style>
+       
                       
 </html>

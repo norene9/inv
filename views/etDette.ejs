@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <%- include('header'); -%>
+    </head>
+    <body>
+        <div class="container">
+           
+            <div class="row">
+                
+                
+                <table class="table" >
+                    <thead>
+                        <tr>
+                            <td scope="row">#</td>
+                            <td scope="row">Nom</td>
+                            <td scope="row">Prenom</td>
+                            <td scope="row">Email</td>
+                            <td scope="row">Composant</td>
+                            <td scope="row">Quantite</td>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                        <% for(var i=0;i< etudiant.length;i++){%>
+                            <% if (etudiant.length!==0){%>
+                                <form action="/Edit_valide" method="POST">
+                        <tr>
+                            <td><%=i%></td>
+                            <input type="text" value="<%=etudiant[i].id%>" name="renid" hidden>
+                            <input type="text" value="<%=etudiant[i].composant.id%>" name="composantId" hidden>
+                            <input type="text" value="<%=etudiant[i].quantity%>" name="missingq" hidden>  
+                            <td><%=etudiant[i].etudiant.firstName%></td>
+                          <td><%=etudiant[i].etudiant.lastName%></td>
+                            <td><%=etudiant[i].etudiant.email%></td>
+                            <td><%=etudiant[i].composant.name%></td>
+                            <td><%=etudiant[i].quantity%></td>
+                            <td><input type="text"  name="qretourner" > </td>
+                            <td><button class="btn btn-success" type="submit">edit</button></td>
+                        </form>
+                        </tr>
+                        <%}%>
+                        <%}%>
+                </tbody>
+            </table>
+            </div>
+           
+
+             
+        
+              
+          
+              </div>
+        </div>
+    </body>
+</html>

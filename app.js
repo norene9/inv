@@ -1,9 +1,25 @@
 let bodyParser = require('body-parser');
+var session=require('express-session')
 let express = require('express')
 let app = express()
+var sass    = require('node-sass');
 var cookieParser=require('cookie-parser')
+var MySQlStore=require('express-mysql-session')(session);
+var options={
+  host:'localhost',
+  user:'root',
+  password:'',
+  database:'stock',
+ 
+}
+var sessionStore=new MySQlStore(options);
+app.use(session({
+  secret:'session_cookie_secret',
+  store:sessionStore,
+  resave:false,
+  saveUninitialized:true
+}))
 
-var session=require('express-session')
 //const bootstrap = require('bootstrap')
 
 
@@ -22,7 +38,8 @@ app.use(function(req, res, next) {
 
  //for authentifiacation
  let crypto = require('crypto')
- let passport=require('passport')
+ var Passport=require('passport').Passport, passport=new Passport();
+ 
  let LocalStrategy=require('passport-local').Strategy
 // parse application/json
 app.use(bodyParser.json())
@@ -32,7 +49,7 @@ var userRouter=require('./routes/passport')
 app.use('/passport',userRouter);
 //express session
 app.use(session({
-  cookie:{httpOnly:false},
+  
   name: 'sid',
   resave: false,
   saveUninitialized: false,
@@ -46,15 +63,20 @@ app.use(session({
 app.set('trust proxy',1)
 app.use(passport.session());
 
-var generalRouter=require('./routes/general');
+var generalRouter=require('./routes/general')
+var authRoutes=require('./routes/auth')(passport)
+require("./routes/passport")(passport)
 const { Users } = require('./sequelize');
+
+app.use('/',authRoutes)
 
   //moteur de view
 app.set('view engine', 'ejs')
 app.use('/',generalRouter)
 //this for calling the static files .js .css images
+
 app.use('/', express.static('assets'))
-;
+
 app.use(express.static(__dirname+'/public'))
 app.get('/ajout', (request, response) => {
   response.render('Ajout')

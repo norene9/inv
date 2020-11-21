@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <%- include('header'); -%>
+    </head>
+    <body>
+        <div class="Card">
+            <div class="Card-header">
+                <table class="table">
+                    <thead>
+                        <td>#</td>
+        <td scope="row">material:</td>
+        <td scope="row">quantite Demande:</td>
+        <td scope="row">quantite Disponible:</td>
+                    </thead>
+                    <tbody>
+                        <% for(var i=0;i< demande.length;i++){%>
+        <tr>
+            <td><%=i%></td>
+            <td><%=demande[i].composant.name%></td>
+            <td><%=demande[i].quantity%></td>
+            <td><%=demande[i].composant.quantity_dispo%></td>
+        </tr>
+        <%}%>
+                    </tbody>
+                </table>
+            </div>
+            <div class="Card-footer">
+<button class="btn btn-danger"><a href="/Supprimer_Demande/<%=bcId%>"></a>Suprimer</button>
+<button class="btn btn-success"><a href="/Demande/<%=bcId%>">Modifier</a></button>
+            </div>
+        </div>
+       
+    </body>
+</html>

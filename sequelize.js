@@ -9,6 +9,7 @@ const EtudiantModel  = require('./models/Etudiant');
 const GroupModel  = require('./models/Group');
 const TypeUserModel  = require('./models/Type_User');
 const PromoModel  = require('./models/Promo');
+const NRetourneModel=require('./models/Material_N_R')
 
 const Bc_ConetntModel=require('./models/Bc_content')
 
@@ -29,7 +30,7 @@ const Groups = GroupModel(sequelize,Sequelize);
 const Promo=PromoModel(sequelize,Sequelize)
 const Bc=BcModel(sequelize,Sequelize)
 const Bc_Content=Bc_ConetntModel(sequelize,Sequelize)
-
+const N_retourne=NRetourneModel(sequelize,Sequelize)
 BL_Content.belongsTo(Composants)
 BL_Content.belongsTo(Bon_Livraison)
 Composants.hasMany(BL_Content)
@@ -47,13 +48,16 @@ Bc.belongsTo(Groups)
 Bc.belongsTo(Promo)
 Bc_Content.belongsTo(Composants)
 Bc_Content.belongsTo(Bc)
-
-sequelize.sync({ force:false })
+Bc_Content.belongsTo(Promo)
+N_retourne.belongsTo(Chefs)
+N_retourne.belongsTo(Etudiants)
+N_retourne.belongsTo(Composants)
+sequelize.sync({ force:false})
     .then(() => {
         console.log(" database init")
     });
  
 
 module.exports = {
-    TypeUser, Users,Bon_Livraison,Chefs,Composants,Etudiants,Groups,BL_Content,Bc,Bc_Content,Promo
+    TypeUser, Users,Bon_Livraison,Chefs,Composants,Etudiants,Groups,BL_Content,Bc,Bc_Content,Promo,N_retourne
 };

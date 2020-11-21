@@ -1,131 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Bootstrap Example</title>
+  
   <%- include('header'); -%>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <style>
-  body {
-    position: relative;
-  }
-  ul.nav-pills {
-    margin-top: 50px;
-    position: fixed;
-  }
-  div.col-8 div {
-    height: 500px;
-  }
-  div.ex1 {
+<head>
+  <link rel="stylesheet" href="card2.css">
+ 
 
-  width: 800px;
-  overflow-x: hidden;
-}
-  </style>
 </head>
-<body data-spy="scroll" data-target="#myScrollspy" data-offset="1">
 
-<div class="container-fluid" style="margin-left: 20px;">
-  <div class="row">
-   
-     
-    <div class="col-sm ">
-      <div id="section1" class="bg" style="height: 200px;">    
-        <h1>Admins</h1>
-        <div class="ex1">
-         
-            <div class="row">
-              <% for (var i=0;i< user.length;i++){%>
-                
-              <div class="col-md-4" style="padding-right:0;padding-left:0;" >
-                <% if (user[i].type_user.typeu=="Admin"){%>
-                <div class="card" style="width: 18rem;">
-                  <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text"><%=user[i].firstName%>.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
-              <%}%>
-              <%}%>
-            </div>
-          
-         
-         
-         
-        
-       
-      </div>
-      <div id="section2" class="bg"> 
-        <h1>Enseignats</h1>
-        <div class="ex1">
-         
-          <div class="row">
-            <% for (var i=0;i< user.length;i++){%>
-             
-             
-            <div class="col-md-4" style="padding-right:0;padding-left:0;" >
-              <% if (user[i].type_user.typeu=="Enseignant"){%>
-              <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text"><%=user[i].firstName%>.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <%}%>
-            <%}%>
-          </div>
-        
-       
-       
-       
+
+<div class="container">
+                  
+  <div class="container py-5">
+    <div  style="font-family: Baskerville, serif;font-style: italic;text-align:center; margin-right: 10%">
+      <h4 class="value">Admin</h4>
       
-     
-    </div>
-        
-      </div>        
-      <div id="section3" class="bg">         
-        <h1>Consultateur</h1>  <div class="ex1">
-         
-          <div class="row">
-            <% for (var i=0;i< user.length;i++){%>
-              
-            <div class="col-md-4" style="padding-right:0;padding-left:0;" >
-              <% if (user[i].type_user.typeu=="Consultateur"){%>
-              <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text"><%=user[i].firstName%>.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <%}%>
-            <%}%>
-          </div>
-        
-       
-       
-       
-      
-     
-    </div>
-      </div>
-           
-      
-    </div>
   </div>
+
+
+<div class="row">
+  <% for (var i=0;i< user.length;i++){%>
+  <% if (user[i].type_user.typeu=="Admin"){%>
+
+<div class="col-sm">
+<div class="frame flex">
+
+<div class="center">
+
+<div class="profile">
+    <div class="image">
+       
+        
+    </div>
+    <div class="job"><%=user[i].firstName%></div>
+<div class="name"><%=user[i].lastName%></div>
+    
+<div>
+<svg xmlns="http://www.w3.org/2000/svg" 
+   width="40px" height="30px"
+   viewBox="5 0 80 60">
+  <path id="wave" 
+      fill="none" 
+      stroke="#262626" 
+      stroke-width="2"
+      stroke-linecap="round">
+  </path>
+</svg>
+</div>
+
+
+    <div class="actions">
+        <button class="btn hvr-underline-from-center"><a href="">plus</a></button>
+        
+        
+    </div>
+</div>
+
+<div class="stats">
+    <div class="box box1 hvr-underline-from-right">
+        <span class="value">password</span>
+        <span class="parameter"><%=user[i].password%></span>
+    </div>
+   
 </div>
 </div>
 
+</div>
+</div>
+<%}%>
+<%}%>
+</div>
+  </div>
+<div class="container py-5">
+<div  style="font-family: Baskerville, serif;font-style: italic;text-align:center; margin-right: 10%">
+  <h4 class="value">Enseignant</h4>
+  
+</div>
+
+
+<div class="row">
+<% for (var i=0;i< user.length;i++){%>
+<% if (user[i].type_user.typeu=="Enseignant"){%>
+
+<div class="col-sm">
+<div class="frame flex">
+
+<div class="center">
+
+<div class="profile">
+<div class="image">
+   
+    
+</div>
+
+<div class="job"><%=user[i].firstName%></div>
+<div class="name"><%=user[i].lastName%></div>
+
+<div>
+<svg xmlns="http://www.w3.org/2000/svg" 
+width="40px" height="30px"
+viewBox="5 0 80 60">
+<path id="wave" 
+  fill="none" 
+  stroke="#262626" 
+  stroke-width="2"
+  stroke-linecap="round">
+</path>
+</svg>
+</div>
+
+
+<div class="actions">
+    <button class="btn hvr-underline-from-center"><a href="">plus</a></button>
+    
+    
+</div>
+</div>
+
+<div class="stats">
+<div class="box box1 hvr-underline-from-right">
+  <span class="value">password</span>
+  <span class="parameter"><%=user[i].password%></span>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+<%}%>
+<%}%>
+</div>
+</div>
+<div class="container py-5">
+<div  style="font-family: Baskerville, serif;font-style: italic;text-align:center; margin-right: 10%">
+  <h4 class="value">Consultateur</h4>
+  
+</div>
+
+
+<div class="row">
+<% for (var i=0;i< user.length;i++){%>
+<% if (user[i].type_user.typeu=="Consultateur"){%>
+
+<div class="col-sm">
+<div class="frame flex">
+
+<div class="center">
+
+<div class="profile">
+<div class="image">
+   
+    
+</div>
+
+
+<div class="job"><%=user[i].firstName%></div>
+<div class="name"><%=user[i].lastName%></div>
+
+<div>
+<svg xmlns="http://www.w3.org/2000/svg" 
+width="40px" height="30px"
+viewBox="5 0 80 60">
+<path id="wave" 
+  fill="none" 
+  stroke="#262626" 
+  stroke-width="2"
+  stroke-linecap="round">
+</path>
+</svg>
+</div>
+
+
+<div class="actions">
+    <button class="btn hvr-underline-from-center"><a href="">plus</a></button>
+    
+    
+</div>
+</div>
+
+<div class="stats">
+<div class="box box1 hvr-underline-from-right">
+  <span class="value">password</span>
+  <span class="parameter"><%=user[i].password%></span>
+</div>
+
+
+</div>
+</div>
+
+</div>
+</div>
+<%}%>
+<%}%>
+</div>
+</div>
+</div>
 </body>
+<script src="card2.js"></script>
+<script src="index.js"></script>
 </html>
 
   

@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <%- include('header'); -%>
+    </head>
+    <body>
+        <div class="container">
+           
+            <div class="row">
+                
+                <h6>Bon de Commande Details</h6>
+                <table class="table" >
+                    <thead>
+                        <tr>
+                            <td scope="row">#</td>
+                            <td scope="row">Matrial</td>
+                            <td scope="row">Details</td>
+                            <td scope="row">Quantite retourne</td>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                        <% for(var i=0;i< demande.length;i++){%>
+                            <% if (demande.length!==0){%>
+                                <form action="/liste_valide" method="POST">
+                        <tr>
+                            <td><%=i%></td>
+                            <td><%=demande[i].composant.name%></td>
+                            <input type="text" value="<%=demande[i].composant.id%>" name="composantId" hidden>
+                            <input type="text" value="<%=demande[i].quantity%>" name="composantQuantity" hidden>
+                            <input type="text" value="<%=demande[i].id%>" name="idc" hidden>
+                            <td><%=demande[i].quantity%></td>
+                            <td><input type="text" name="quantity_r"></td>
+                            <td><button class="btn btn-success">submit</button></td>
+                        </form>
+                        </tr>
+                        <%}%>
+                        <%}%>
+                </tbody>
+            </table>
+            </div>
+           
+
+             
+        
+              
+          
+              </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,199 @@
+<html>
+    <head>
+        <%- include('header'); -%>
+        <link rel="stylesheet" href="card2.css">
+    </head>
+    <body>
+        <div class="container">
+            <h4 style="text-align: center; background-color: darkgray">Demande en attente</h4>
+            <div class="row">
+                
+                <% for(var i=0;i< demande.length;i++){%>
+                    <% if (demande.id!==""){%>
+                        <% if (demande[i].etat=="en attente"){%>
+                        <div class="col-sm">
+                <div class="frame flex">
+                   
+                    <div class="center">
+                      
+                          <div class="profile">
+                              <div class="image">
+                                 
+                                  
+                              </div>
+                              
+                              <div class="name">Titre</div>
+                              <div class="job"><%=demande[i].Titre%></div>
+                              
+                        <div>
+                          <svg xmlns="http://www.w3.org/2000/svg" 
+                             width="40px" height="30px"
+                             viewBox="5 0 80 60">
+                            <path id="wave" 
+                                fill="none" 
+                                stroke="#262626" 
+                                stroke-width="2"
+                                stroke-linecap="round">
+                            </path>
+                          </svg>
+                        </div>
+                  
+                  
+                            
+                          </div>
+                          
+                          <div class="stats">
+                              <div class="box box1 hvr-underline-from-right">
+                                  <span class="value">Promo</span>
+                                  <span class="parameter"><%=demande[i].promo.promo%> </span>
+                              </div>
+                              <div class="box box2 hvr-underline-from-right">
+                                  <span class="value">Groupe</span>
+                                  <span class="parameter"><%=demande[i].teamId%></span>
+                              </div>
+                              <div class="box box3 hvr-underline-from-right">
+                                  <span class="value">Etat</span>
+                                  <span class="parameter"><%=demande[i].etat%></span>
+                              </div>
+                          </div>
+                    </div>
+                   
+                  </div>
+                </div>
+                  <%}%>
+                    <%}%>
+                    <%}%>
+                </div>
+                <h4 style="text-align: center; background-color: darkgray">Demande valide</h4>
+                <div class="row">
+                    
+                    <% for(var i=0;i< demande.length;i++){%>
+                        <% if (demande.id!==""){%>
+                            <% if (demande[i].etat=="valide-en-attente"){%>
+                            <div class="col-sm">
+                    <div class="frame flex">
+                       
+                        <div class="center">
+                          
+                              <div class="profile">
+                                  <div class="image">
+                                     
+                                      
+                                  </div>
+                                  
+                                  <div class="name">Titre</div>
+                                  <div class="job"><%=demande[i].Titre%></div>
+                                  
+                            <div>
+                              <svg xmlns="http://www.w3.org/2000/svg" 
+                                 width="40px" height="30px"
+                                 viewBox="5 0 80 60">
+                                <path id="wave" 
+                                    fill="none" 
+                                    stroke="#262626" 
+                                    stroke-width="2"
+                                    stroke-linecap="round">
+                                </path>
+                              </svg>
+                            </div>
+                      
+                      
+                                  <div class="actions">
+                                      <button class="btn hvr-underline-from-center"><a href="/Confirmer/<%=demande[i].id%>">Confirmer</a></button>
+                                      
+                                      
+                                  </div>
+                              </div>
+                              
+                              <div class="stats">
+                                  <div class="box box1 hvr-underline-from-right">
+                                      <span class="value">Promo</span>
+                                      <span class="parameter"><%=demande[i].promo.promo%> </span>
+                                  </div>
+                                  <div class="box box2 hvr-underline-from-right">
+                                      <span class="value">Groupe</span>
+                                      <span class="parameter"><%=demande[i].teamId%></span>
+                                  </div>
+                                  <div class="box box3 hvr-underline-from-right">
+                                      <span class="value">Etat</span>
+                                      <span class="parameter"><%=demande[i].etat%></span>
+                                  </div>
+                              </div>
+                        </div>
+                       
+                      </div>
+                    </div>
+                      <%}%>
+                        <%}%>
+                        <%}%>
+                    </div>
+                    <h4 style="text-align: center; background-color: darkgray">Demande refuser</h4>
+                    <div class="row">
+                        
+                        <% for(var i=0;i< demande.length;i++){%>
+                            <% if (demande.id!==""){%>
+                                <% if (demande[i].etat=="refuser"){%>
+                                <div class="col-sm">
+                        <div class="frame flex">
+                           
+                            <div class="center">
+                              
+                                  <div class="profile">
+                                      <div class="image">
+                                         
+                                          
+                                      </div>
+                                      
+                                      <div class="name">Titre</div>
+                                      <div class="job"><%=demande[i].Titre%></div>
+                                      
+                                <div>
+                                  <svg xmlns="http://www.w3.org/2000/svg" 
+                                     width="40px" height="30px"
+                                     viewBox="5 0 80 60">
+                                    <path id="wave" 
+                                        fill="none" 
+                                        stroke="#262626" 
+                                        stroke-width="2"
+                                        stroke-linecap="round">
+                                    </path>
+                                  </svg>
+                                </div>
+                          
+                          
+                                      <div class="actions">
+                                          <button class="btn hvr-underline-from-center"><a href="/liste_Details_Refuser/<%=demande[i].id%>">details</a></button>
+                                          
+                                          
+                                      </div>
+                                  </div>
+                                  
+                                  <div class="stats">
+                                      <div class="box box1 hvr-underline-from-right">
+                                          <span class="value">Promo</span>
+                                          <span class="parameter"><%=demande[i].promo.promo%> </span>
+                                      </div>
+                                      <div class="box box2 hvr-underline-from-right">
+                                          <span class="value">Groupe</span>
+                                          <span class="parameter"><%=demande[i].teamId%></span>
+                                      </div>
+                                      <div class="box box3 hvr-underline-from-right">
+                                          <span class="value">Etat</span>
+                                          <span class="parameter"><%=demande[i].etat%></span>
+                                      </div>
+                                  </div>
+                            </div>
+                           
+                          </div>
+                        </div>
+                          <%}%>
+                            <%}%>
+                            <%}%>
+                        </div>
+           
+          
+              </div>
+        </div>
+        <script src="card2.js"></script>
+    </body>
+</html>

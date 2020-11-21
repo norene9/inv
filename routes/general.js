@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser')
 var router = express.Router(); 
-
+var dialog = require('dialog');
 const { Composants } = require('../sequelize');
 const { Users } = require('../sequelize');
 const {TypeUser} = require('../sequelize');
@@ -13,11 +13,13 @@ const {Etudiants} = require('../sequelize');
 const {Chefs} = require('../sequelize');
 const{Bc}=require('../sequelize')
 const{Bc_Content}=require('../sequelize')
+const{N_retourne}=require('../sequelize')
 // create application/json parser
 var jsonParser = bodyParser.json()
 var generator = require('generate-password');
 const { Router } = require('express');
 const User = require('../models/User');
+const { route } = require('../app');
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 router.use(bodyParser.json())
@@ -30,7 +32,7 @@ function returnsPromise() {
 router.get('/',async  function(req, res, next) {
  
   try{
-    if(req.isAuthenticated()){
+  
       var types= await TypeUser.findAll();
     console.log(types)
     if(types.length==0){
@@ -38,14 +40,9 @@ router.get('/',async  function(req, res, next) {
       TypeUser.create({typeu:'Enseignant'})
       TypeUser.create({typeu:'Consultateur'})
       Users.create({firstName:'admin_principale',lastName:'admin_principale',email:'a.a@esi-sba.dz',password:'esi',typeUserId:admin.id})
-      res.redirect('/user/'+req.user.id)
-   }else{
-     console.log(req.isAuthenticated())
-     res.redirect('/user/'+req.user.id)
-   }
-    }else{
+      
       console.log(req.isAuthenticated())
-res.render('login')
+res.redirect('/login')
     }
   
   }catch(err){
@@ -57,11 +54,33 @@ res.render('login')
  
  });
  
+router.get('/login', async function(req,res,next){
+    
+  res.render('login')
+ 
+})
+router.get('/logout',function(req,res){
+  req.logOut();
+  res.redirect('/login')
+})
+ 
  //================login=================//
- router.get('/user/:id',async function(req,res,next){
-   console.log(req.session)
-  
-  var us= await Users.findOne({where:{id:req.params.id}})
+ var loggedin=function(req,res,next){
+   console.log(req.user)
+   if(req.isAuthenticated()){
+
+    console.log('kkk')
+    
+     next()
+     
+   }else{
+     res.redirect('/login')
+   }
+ }
+ router.get('/user',loggedin,async function(req,res,next){
+   //console.log(req.session.passport.user)
+  console.log(req.user.id)
+  var us= await Users.findOne({where:{id:req.user.id}})
   var type=await TypeUser.findOne({where:{id:us.typeUserId}})
   if (type.typeu=='Admin'){
    var cpi_1= await Promo.findOne({where:{promo:'1CPI'}})
@@ -78,10 +97,25 @@ res.render('login')
     if (cs_2i==null){Promo.create({promo:'2CS(ISI)'})}
     if (cs_3i==null){Promo.create({promo:'3CS(ISI)'})}
     if (cs_2w==null){Promo.create({promo:'3CS(SIW)'})}
-    res.render('index')}
+    var bc =await Bc.findAll({include:[{model:Promo},{model:Groups}],order:[['id','DESC']]})
+    res.render('index',{bc})}
   if (type.typeu=='Enseignant'){
-    console.log(req.isAuthenticated(),'lllllllllllllll')
-    res.render('./user_pages/index')
+    try{
+    console.log(req.isAuthenticated())
+    //console.log(req.session.passport.user)
+
+    //console.log(req.user.id)
+    //var bcommande =await Bc.create({userId:req.session.passport.user})
+var promo2CPI=await Promo.findOne({where:{promo:'2CPI'}})
+var promo1CPI=await Promo.findOne({where:{promo:'1CPI'}})
+var promo1CS=await Promo.findOne({where:{promo:'1CS'}})
+var promo2CS_SIW=await Promo.findOne({where:{promo:'2CS(SIW)'}})
+var promo2CS_ISI=await Promo.findOne({where:{promo:'2CS(ISI)'}})
+var promo3CS_SIW=await Promo.findOne({where:{promo:'3CS(SIW)'}})
+var promo3CS_ISI=await Promo.findOne({where:{promo:'3CS(ISI)'}})
+var groupe=await Groups.findAll({include:[Promo]})
+  res.render('./user_pages/NewDemande',{groupe,promo1CS,promo1CPI,promo2CPI,promo2CS_ISI,promo3CS_SIW,promo3CS_ISI,promo2CS_SIW})
+  }catch(err){next(err)}
     
   }
  })
@@ -104,7 +138,7 @@ var groupe=await Groups.findAll({include:[Promo]})
 })
 router.get('/Demande/:id',async function(req,res,next){
   try{
-    
+    var message="nothing"
     var bcn=req.params.id
     var bc=await Bc.findOne({where:{id:bcn}})
     var promo =await Promo.findAll()
@@ -112,7 +146,7 @@ router.get('/Demande/:id',async function(req,res,next){
     var groupe=await Groups.findAll({include:[Promo]})
     var content=await Bc_Content.findAll({where:{bcId:bcn},include:[Composants]})
     console.log(content[0])
-    res.render('./user_pages/Demande',{groupe,promo,bcn,composant,content,bc})
+    res.render('./user_pages/Demande',{groupe,promo,bcn,composant,content,bc,message})
   }catch(err){
 next(err)
   }
@@ -120,27 +154,169 @@ next(err)
   router.post('/Edit_bc',async function(req,res,nex){
     await Bc_Content.update({quantity:req.body.edit},{where:{id:req.body.id}})
     var bc=await Bc_Content.findOne({where:{id:req.body.id}})
+    Bc.update({etat:'en-attente'},{where:{id:bc.bcId}})
     res.redirect('/Demande/'+bc.bcId)
   })
   router.post('/Ajout',async function(req,res,next){
     try{
       if(req.body.tajout=='groupe'){
         console.log(req.body.numero)
-      var bc=  await Bc.create({userId:req.session.passport.user,teamId:req.body.numero,promoId:req.body.promo})
+        var team= await Groups.findOne({where:{numero:req.body.numero}})
+      var bc=  await Bc.create({userId:req.user.id,teamId:team.id,promoId:req.body.promo,etat:'en attente',Titre:req.body.titre})
       
        res.redirect('/Demande/'+bc.id) 
       }
       if(req.body.tajout=='bcon'){
         console.log(req.body.numero)
         var composant=await Composants.findOne({where:{name:req.body.composant}})
-        await Bc_Content.create({quantity:req.body.quantite,composantId:composant.id,bcId:req.body.bc})
-       res.redirect('/Demande/'+req.body.bc) 
+        var bc=await Bc.findOne({where:{id:req.body.bc}})
+        if(req.body.quantite>composant.quantity_dispo){
+          dialog.err('La Quantite demander est superieur a la quantite disponible.... ', 'Error', function(exitCode) {
+            if (exitCode == 0) res.redirect('/Demande/'+req.body.bc)
+        })
+        
+        }else{ await Bc_Content.create({quantity:req.body.quantite,composantId:composant.id,bcId:req.body.bc,promoId:bc.promoId})
+        res.redirect('/Demande/'+req.body.bc) }
+       
       }
     
     }catch(err){
   next(err)
     }
     })
+    //========================Liste des Demande===========///////
+    router.get('/liste_demande',async function(req,res,next){
+ 
+     /*var demande=await Bc.findAll({
+      include: [
+        {model:Bc_Content}, 
+        {model: Composants},
+        {model: Promo},],
+      attributes: ['id','quantity'], 
+    })*/
+    var demande=await Bc.findAll({include:[Promo]})
+    
+      res.render('liste_demande',{demande})
+    })
+    router.get('/liste_Details/:id',async function(req,res,next){
+ 
+      var demande=await Bc_Content.findAll({where:{bcId:req.params.id},
+       include: [
+        
+         {model: Composants},
+         {model: Promo},
+        ],
+       attributes: ['id','quantity'], 
+     })
+     
+     var bcId=req.params.id
+       res.render('liste_Details',{demande,bcId})
+     })
+     router.get('/liste_valide/:id',async function(req,res,next){
+ 
+      var demande=await Bc_Content.findAll({where:{bcId:req.params.id},
+       include: [
+        
+         {model: Composants},
+         {model: Promo},
+        ],
+       attributes: ['id','quantity'], 
+     })
+     
+     var bcId=req.params.id
+       res.render('liste_Valide',{demande,bcId})
+     })
+     router.post('/liste_valide',async function(req,res,next){
+       try{
+        if(req.body.quantity_r==req.body.composantQuantity){
+          var bc=await Bc_Content.findOne({where:{id:req.body.idc}})
+          bcId=bc.bcId;
+          await Composants.increment('quantity',{by:req.body.quantity_r,where:{id:bc.composantId}})
+          await Composants.increment('quantity_dispo',{by:req.body.quantity_r,where:{id:bc.composantId}})
+          await Bc_Content.destroy({where:{id:req.body.idc}})
+          res.redirect('/liste_valide/'+bcId)
+        }else{
+          var b=await Bc_Content.findOne({where:{id:req.body.idc}})
+          var bc=await Bc.findOne({where:{id:b.bcId}})
+          var chef= await Chefs.findOne({where:{teamId:bc.teamId}})
+          await Composants.increment('quantity_dispo',{by:req.body.quantity_r,where:{id:b.composantId}})
+          var quantity_lost=parseInt(req.body.composantQuantity)-parseInt(req.body.quantity_r)
+          await Composants.decrement('quantity',{by:quantity_lost,where:{id:b.composantId}})
+          console.log(parseInt(quantity_lost))
+  await N_retourne.create({quantity:quantity_lost,composantId:req.body.composantId,chefId:chef.id,etudiantId:chef.etudiantId})
+  res.redirect('/liste_valide/'+bc.id)
+        }
+       }catch(err){
+         next(err)
+       }
+    
+     })
+     router.get('/etDette',async function(req,res,next){
+       try{
+        var etudiant=await N_retourne.findAll({include:[{model:Etudiants},{model:Chefs},{model:Composants}]})
+        res.render('etDette',{etudiant})
+       }catch(err){next(err)}
+
+     })
+     router.post('/Edit_valide',async function(req,res,next){
+       try{
+         if(req.body.qretourner==req.body.qretourner){N_retourne.destroy({where:{id:req.body.renid}})}
+        await N_retourne.decrement('quantity',{by:req.body.qretourner,where:{id:req.body.renid}})
+        await Composants.increment('quantity',{by:req.body.qretourner,where:{id:req.body.composantId}})
+        await Composants.increment('quantity_dispo',{by:req.body.qretourner,where:{id:req.body.composantId}})
+        res.redirect('/etDette')
+        
+       }catch(err){
+         next(err)
+       }
+     })
+     router.post('/etat/:id',async function(req,res,next){
+       try{
+            if(req.body.etat=='valide-att'){
+        await Bc.update({etat:'valide-en-attente'},{where:{id:req.params.id}})
+         res.redirect('/liste_Details/'+req.params.id)
+       }else
+       if(req.body.etat=='refuser'){
+       await Bc.update({etat:'refuser'},{where:{id:req.params.id}})
+        res.redirect('/liste_Details/'+req.params.id)
+      }
+      else
+       if(req.body.etat=='valide'){
+        await Bc.update({etat:'valide'},{where:{id:req.params.id}})
+        res.redirect('/liste_Details/'+req.params.id)
+      }
+       }catch(err){
+         next(err)
+       }
+   
+     })
+     router.get('/Confirmer/:id',async function(req,res,next){
+      var bc=await Bc.findOne({where:{id:req.params.id}})
+      Bc.update({etat:'valide'},{where:{id:bc.id}})
+      var bcontent=await Bc_Content.findAll({where:{bcId:bc.id},include:[Composants]})
+      console.log(bcontent.length)
+      for(var i=0;i<bcontent.length;i++){
+        await Composants.decrement('quantity_dispo',{by:bcontent[i].quantity,where:{id:bcontent[i].composant.id}})
+      }
+      res.redirect('/Liste_demande_Ens')
+     })
+     //==================liste demande pour ens==========//
+     router.get('/Liste_demande_Ens',async function(req,res,next){
+       var demande=await Bc.findAll({where:{userId:req.user.id},include:[{model:Promo},{model:Groups}]})
+       res.render('./user_pages/Liste_demande_Ens',{demande})
+     })
+     //============Detail pour demande refuser================//
+     router.get('/liste_Details_Refuser/:id',async function(req,res,next){
+var demande=await Bc_Content.findAll({where:{bcId:req.params.id},include:[Composants]})
+var bcId=demande[0].bcId
+res.render('./user_pages/liste_Details_Refuser',{demande,bcId})
+     })
+     router.get('/Supprimer_Demande/:id',async function(req,res,next){
+       Bc_Content.destroy({where:{bcId:req.params.id}})
+       Bc.destroy({where:{id:req.params.id}})
+       res.redirect('/Liste_demande_Ens')
+
+     })
  /*router.get('/user/:id',async function(req,res,next){
 var user =await Users.findOne({where:{id:req.params.id}})
   res.render('./user_pages/index',{user})
@@ -151,12 +327,13 @@ var user =await Users.findOne({where:{id:req.params.id}})
    router.post('/Add_Eq',urlencodedParser,async  function(req, res, next) {
     try{
      await Composants.create({name:req.body.nom,quantity:'0',quantity_dispo:'0'})
-     res.redirect('Add_Eq')
-    } catch(err)  {
+     res.redirect('/Add_Eq')
+    } catch(err){
      //next(err)
-     res.send('opps')
+      dialog.err('Material Exist deja ', 'Error', function(exitCode) {
+            if (exitCode == 0) res.redirect('/Add_Eq')})
      
-    }     
+      }    
  
 });
   //=============GET Equipement===========// 
@@ -185,7 +362,8 @@ var user =await Users.findOne({where:{id:req.params.id}})
          
       }catch(err){
         //next(err)
-        res.send('Le composant exist deja')
+        dialog.err('Material Exist deja ', 'Error', function(exitCode) {
+          if (exitCode == 0) res.redirect('/Add_Eq')})
       }
      });
      router.post('/BL_con_Edit',async  function(req, res, next) {
@@ -404,6 +582,7 @@ router.post('/Delete_BL',urlencodedParser,async  function(req, res, next) {
         })
         router.get('/Groups/:id',urlencodedParser,async  function(req, res, next) {
           try{
+            console.log(req.user.id)
             var promo_2= await Promo.findOne({where:{id:req.params.id}})
           var group=  await Groups.findAll({where:{promoId:req.params.id}})
           console.log(group)
@@ -427,13 +606,27 @@ router.post('/Delete_BL',urlencodedParser,async  function(req, res, next) {
             res.redirect('/Groups/'+promo.id)
            }
             else{
-              res.send('il y a un bc pour ce groupe')
+              dialog.err('Il y aun bon de commande pour ce groupe la suppression ', 'Error', function(exitCode) {
+                if (exitCode == 0) res.redirect('/Add_Eq')})
             }
           }catch(err){
             next(err)
           }
        
          
+        })
+        router.get('/Decharge/:id',async function(req,res,next){
+          try{
+            var demande=await Bc_Content.findAll({where:{bcId:req.params.id},include:[Composants]})
+          
+          var bc=await Bc.findOne({where:{id:req.params.id},include:[Promo]})
+          var team=await Groups.findOne({where:{id:bc.teamId}})
+          var use=await Users.findOne({where:{id:bc.userId}})
+          console.log(use.firstName,'llllllllllllllllllllllllllllllllllll')
+          var chef=await Chefs.findOne({include:[{model:Etudiants},{model:Groups}]})
+          res.render('Decharge',{demande,team,chef,bc,use})
+          }catch(err){next(err)}
+          
         })
         //==================GET GROUPS===================//
         router.get('/find_promo_2CS_SIW',urlencodedParser,async  function(req, res, next) {
@@ -535,7 +728,8 @@ router.post('/Delete_BL',urlencodedParser,async  function(req, res, next) {
           console.log(chefs)
           if (chefs == null){  await Etudiants.destroy({where:{id:req.params.id}})}
           else{
-            res.send('Vous pouvez pas suprimer un chef')
+            dialog.err('Vous ne pouvez pas suprimer un chef', 'Error', function(exitCode) {
+              if (exitCode == 0) res.redirect('/Add_Eq')})
           }
          
           res.redirect('/Add_et/'+et.teamId)
@@ -562,7 +756,7 @@ router.post('/Delete_BL',urlencodedParser,async  function(req, res, next) {
       }catch(err){
         next(err)  
       }
-      console.log(user)});
+      console.log(req.user)});
       router.post('/Add_User1',urlencodedParser,async  function(req, res, next) {
         try{
           

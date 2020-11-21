@@ -4,52 +4,34 @@
 <head>
   <%- include('header'); -%>
   <title>Adding Componant</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+  <link rel="stylesheet" href="user.css">
+  
 </head>
 <body>
-    <div class="row">
-        <div class="col-sm"> 
-        <div class="card" style="width:400px">
-            <div class="card-body">
-              <h4 class="card-title">Voir Liste Enseingant</h4>
-              <a href="Teachers" class="btn btn-primary">Continue</a>
-            </div>
-      </div>
-    <div class="card" style="width:400px">
-        <div class="card-body">
-          <h4 class="card-title">Voir Liste Admin</h4>
-          <a href="Teachers" class="btn btn-primary">Continue</a>
-        </div>
-        </div>
-        <div class="card" style="width:400px">
-            <div class="card-body">
-              <h4 class="card-title">Voir Liste Admin</h4>
-              <a href="Teachers" class="btn btn-primary">Continue</a>
-            </div>
-            </div>
-  </div>
+    
       
+  <div class="card">
         
-           <div class="col-sm">
-                <section id="ajout">
-                <h2>Ajouter Nouveau Utilisateur</h2>
-                <form action="/Add_User" method="POST" >
-                  <!---<div class="form-group">
-                    
-                    <label >type:</label>
-                    <input type="text" class="form-control" name="type">
-                  </div>--->
-                  <label >Nom</label>
-                  <input type="text" class="form-control" name="nom">
-                  <label >Prenom</label>
-                  <input type="text" class="form-control" name="prenom">
-                  <label for="inputEmail4">Email</label>
+    <div class="banner"></div>
+    <ul>
+      <h2>Ajouter Nouveau Utilisateur</h2>
+
+
+    </ul>
+    <button class="contact" id="main-button">click to get in touch</button>
+   
+   
+      
+                <form action="/Add_User" method="POST"  class="email-form">
+                 
+                  
+                  <input type="text" class="form-control" name="nom" placeholder="Nom">
+                
+                  <input type="text" class="form-control" name="prenom" placeholder="prenom">
+                
                   <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email">
-                  <label for="inputState">Type</label>
+                 
                   <select id="inputState" class="form-control" name='typeid'>
                     <option selected>Choose...</option>
                     <% for (var i=0;i< tuser.length;i++){%>
@@ -59,36 +41,27 @@
                            
                             <% }%> 
                   </select>
-                  <div class="form-group">
+                  
                     
-                  <button type="submit" class="btn btn-default">Submit</button>
+                  <button type="submit" class="contact" style="margin-top: 0%;">Submit</button>
                 </form>
+  
+           <div class="col-sm">
+                <section id="ajout">
+                
               
    
  
             </form>
         </div>
-        <div class="col-sm">
-           
-            <h2>Ajouter Nouveau Materiel</h2>
-            <form action="/Add_User1" method="POST" >
-              <div class="form-group">
-                
-                <label >type:</label>
-                <input type="text" class="form-control" name="type" >
-              </div>
-            
-              <div class="form-group">
-                
-              <button type="submit" class="btn btn-default">Submit</button>
-            </form>
-          </div>
+      
           </div>
        
       </div>
   
-   
+       
 
 
 </body>
+<script src="user.js"></script>
 </html>

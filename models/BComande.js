@@ -6,6 +6,9 @@ module.exports=(sequelize,type)=>{
             type:type.INTEGER,
             primaryKey:true,
             autoIncrement:true
-        }
+        },
+        etat:type.STRING,
+        Titre:type.STRING
+
     })
 }

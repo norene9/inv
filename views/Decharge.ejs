@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="user.css">
+    </head>
+    <body>
+        <div class="container" >
+            <div class="row">
+                <div class="col-sm-1">
+                    
+                </div>
+                <div class="col" style="text-align: center;">
+                    <img src="/images/logo.png" width="80px" height="80px">
+                    <p>République algérienne Démocratique et Populaire</p>
+                    <p>الجمهورية الديموقراطيةالشعبية الجزائرية </p>
+                    
+                <p>Ministère de l'Enseignement Supérieur et de la recherche scientifique</p> 
+                                <p>وزارة التعليم العالي</p>
+                </div>
+            </div>
+        
+    
+  
+     
+        <h4 style="text-align: center; margin-top: 20%;"><u><b>DECHARGE POUR MATIERE INFORMATIQUE</b></u></h4>
+        <p style="margin-top: 10%;"><u>Titre de projet:</u></p>
+        <p><u>Groupe:</u><%=team.numero%></p>
+        <p><u>Promo:</u><%=bc.promo.promo%></p>
+        <div class="container">
+            <table class="table table-bordered">
+                <thead>
+                    <td scope="col">Designation</td>
+                    <td scope="col">Quatite</td>
+                    <td scope="col">Observation</td>
+                </thead>
+                <tbody>
+                    <% for(var i=0;i< demande.length;i++){%>
+                    <tr>
+                        <td><%=demande[i].composant.name%></td>
+                        <td><%=demande[i].quantity%></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <%}%>
+                </tbody>
+    
+            </table>
+        </div>
+        
+        <div class="container" style="margin-top: 30%;">
+            <div class="row">
+                <div class="col-sm">
+                    <p><u>Chef de groupe:</u><br><%=chef.etudiant.firstName%><p><%=chef.etudiant.lastName%></p></p>
+                    <p><u>N Telephone:</u></p>
+                    <p><u>Signature:</u></p>
+                    <p><u>Date:</u></p>
+                </div>
+                <div class="col-sm">
+                    <p>Encadreur:</p><%=use.firstName%> <%=use.lastName%>
+                    <p>Signature:</p>
+                    <p></p>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+       
+    </body>
+</html>

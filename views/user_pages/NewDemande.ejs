@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +5,13 @@
   <title>Adding Componant</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="user.css">
+  <link rel="stylesheet" href="user1.css">
+  <link rel="stylesheet" href="user3.css">
+  <link rel="stylesheet" href="user4.css">
+  <link rel="stylesheet" href="user5.css">
+  <link rel="stylesheet" href="user6.css">
+  <link rel="stylesheet" href="user7.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -13,151 +19,325 @@
     
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-          <div class="col-sm">
-            <div class="card" style="width: 18rem;">
-                <div class="card-header bg-dark">
-                   
-                </div>
-                <div class="card-body">
-                  <h5 class="card-title">2CPI</h5>
-                  <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#2CPI">Nouveau Demande</a>
-                </div>
-              </div>
-          </div>
-          <div class="col-sm">
-            <div class="card" style="width: 18rem;">
-                <div class="card-header bg-dark">
-                   
-                  </div>
-                <div class="card-body">
-                  <h5 class="card-title">2CS</h5>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4
+">
+  <div class="card1">
+        
+    
+    <ul>
+      <h2>Nouvelle Demande</h2>
+      <br><h3>1CPI</h3>
+
+
+    </ul>
+    <button class="contact1" id="main-button1">cliquer</button>
+    <form action="/Ajout" method="POST" class="email-form1">
+      <input type="text" name="tajout" value="groupe" hidden> 
+      <label for="inputState">Titre</label>
+      <input type="text" name="titre">
+      <label for="inputState">Numero</label>
+      <select id="inputState" class="form-control" name='numero'>
+        <option selected>Groupe...</option>
+        <% for (var i=0;i< groupe.length;i++){%>
+            <% if(groupe[i].promo.promo=="1CPI") {%>
+        <option style="color: black;"><%= groupe[i].numero%></option>
+        <%}%>
                
-                  <a href="#" class="btn btn-primary"data-toggle="modal" data-target="#2CS">Nouveau Demande</a>
-                </div>
-              </div>
+                <% }%> 
+      </select>
+      <input type="text" value="<%=promo1CPI.id%>" name="promo" hidden>
+      
+      <button type="submit" class="contact1">Submit</button>
+    </form>
+   
+      
+                
+  
+         
+      
           </div>
-          <div class="col-sm">
-            <div class="card" style="width: 18rem;">
-                <div class="card-header bg-dark">
-                   
-                </div>
-     
-                <div class="card-body">
-                  <h5 class="card-title">3Cs</h5>
-                  
-                  <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#3CS">Nouveau Demande</a>
+        </div>
+        
+        <div class="col-md-4
+">
+  <div class="card">
+        
+    <div class="banner"></div>
+    <ul>
+      <h2>Nouvelle Demande</h2>
+      <br><h3>2CPI</h3>
+
+
+    </ul>
+    <button class="contact" id="main-button">cliquer</button>
+    <form action="/Ajout" method="POST" class="email-form">
+      <input type="text" name="tajout" value="groupe" hidden>
+      <label for="inputState">Titre</label>
+      <input type="text" name="titre">
+      <label for="inputState">Numero</label>
+      <select id="inputState" class="form-control" name='numero'>
+        <option selected>Groupe...</option>
+        <% for (var i=0;i< groupe.length;i++){%>
+            <% if(groupe[i].promo.promo=="2CPI") {%>
+        <option style="color: black;"><%= groupe[i].numero%></option>
+        <%}%>
+               
+                <% }%> 
+      </select>
+      <input type="text" value="<%=promo2CPI.id%>" name="promo" hidden>
+      
+      <button type="submit" class="contact" >Submit</button>
+    </form>
+   
+      
+                
+  
+           <div class="col-sm">
+                <section id="ajout">
+                
+              
+   
+ 
+            </form>
+        </div>
+      
+          </div>
+        </div>
+        <div class="col-md-4
+">
+          <div class="card">
+        
+            <div class="banner3"></div>
+            <ul>
+              <h2>Nouvelle Demande</h2>
+              <br><h3>1CS</h3>
+        
+        
+            </ul>
+            <button class="contact3" id="main-button3">cliquer</button>
+            <form action="/Ajout" method="POST" class="email-form3">
+              <input type="text" name="tajout" value="groupe" hidden>
+              <label for="inputState">Titre</label>
+      <input type="text" name="titre">
+      <label for="inputState">Numero</label>
+              <select id="inputState" class="form-control" name='numero'>
+                <option selected>Groupe...</option>
+                <% for (var i=0;i< groupe.length;i++){%>
+                    <% if(groupe[i].promo.promo=="1CS") {%>
+                <option style="color: black;"><%= groupe[i].numero%></option>
+                <%}%>
+                       
+                        <% }%> 
+              </select>
+              <input type="text" value="<%=promo1CS.id%>" name="promo" hidden>
+              
+              <button type="submit" >Submit</button>
+            </form>
+           
+              
+                        
+          
+                   <div class="col-sm">
+                        <section id="ajout">
+                        
+                      
+           
+         
+                    </form>
                 </div>
               
-          </div>
+                  </div>
         </div>
-      </div>
-      <!-----------------------------------2CPI Modal----------->
-      <div class="modal fade" id="2CPI" role="dialog">
-        <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5> Nouveau Demande :  </h5>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-            
-            <div class="modal-body">
-                <form action="/Ajout" method="POST" >
-                    <input type="text" name="tajout" value="groupe">
-                    <label for="inputState">Type</label>
-                    <select id="inputState" class="form-control" name='numero'>
-                      <option selected>Groupe...</option>
-                      <% for (var i=0;i< groupe.length;i++){%>
-                          <% if(groupe[i].promo.promo=="2CPI") {%>
-                      <option style="color: black;"><%= groupe[i].numero%></option>
-                      <%}%>
-                             
-                              <% }%> 
-                    </select>
-                    <input type="text" value="<%=promo2CPI.id%>" name="promo">
-                    
-                    <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#componant">Submit</button>
-                  </form>
-                  
-            </div>
-          </div>
+        <div class="col-md-4
+">
+          <div class="card">
         
-        </div>
-      
-      </div>
-       <!-----------------------------------2Cs Modal----------->
-       <div class="modal fade" id="2CS" role="dialog">
-        <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5> Nouveau Demande :  </h5>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-            
-            <div class="modal-body">
-                <form action="/Ajout" method="POST" >
-                    <input type="text" name="tajout" value="groupe">
-                    <label for="inputState">Type</label>
-                    <select id="inputState" class="form-control" name='numero'>
-                      <option selected>Groupe...</option>
-                      <% for (var i=0;i< groupe.length;i++){%>
-                          <% if(groupe[i].promo.promo=="2CS") {%>
-                      <option style="color: black;"><%= groupe[i].numero%></option>
-                      <%}%>
-                             
-                              <% }%> 
-                    </select>
-                    <input type="text" value="<%= promo2CS.id%>" name="promo">
-                    
-                    <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#componant">Submit</button>
-                  </form>
-                  
-            </div>
-          </div>
-        
-        </div>
-      
-      </div>
-      <!-----------------------------------3CS Modal----------->
-      <div class="modal fade" id="3CS" role="dialog">
-        <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5> Nouveau Demande :  </h5>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-            
-            <div class="modal-body">
-                <form action="/Ajout" method="POST" >
-                    <input type="text" name="tajout" value="groupe">
-                    <label for="inputState">Type</label>
-                    <select id="inputState" class="form-control" name='numero'>
-                      <option selected>Groupe...</option>
-                      <% for (var i=0;i< groupe.length;i++){%>
-                          <% if(groupe[i].promo.promo=="3CS") {%>
-                            
-                      <option style="color: black;"><%= groupe[i].numero%></option>
-                      <%}%>
-                             
-                              <% }%> 
-                    </select>
-                    <input type="text" value="<%= promo3CS.id%>" name="promo">
-                    <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#componant">Submit</button>
-                  </form>
-                  
-            </div>
-          </div>
-        
-        </div>
-      
-      </div>
- 
+            <div class="banner4"></div>
+            <ul>
+              <h2>Nouvelle Demande</h2>
+              <br><h3>2CS(SIW)</h3>
         
         
-
+            </ul>
+            <button class="contact4" id="main-button4">cliquer</button>
+            <form action="/Ajout" method="POST" class="email-form4">
+              <input type="text" name="tajout" value="groupe" hidden>
+              <label for="inputState">Titre</label>
+      <input type="text" name="titre">
+      <label for="inputState">Numero</label>
+              <select id="inputState" class="form-control" name='numero'>
+                <option selected>Groupe...</option>
+                <% for (var i=0;i< groupe.length;i++){%>
+                    <% if(groupe[i].promo.promo=="2CS(SIW)") {%>
+                <option style="color: black;"><%= groupe[i].numero%></option>
+                <%}%>
+                       
+                        <% }%> 
+              </select>
+              <input type="text" value="<%=promo2CS_SIW.id%>" name="promo" hidden>
+              
+              <button type="submit" class="contact4" >Submit</button>
+            </form>
+           
+              
+                        
           
+                   <div class="col-sm">
+                        <section id="ajout">
+                        
+                      
+           
+         
+                    </form>
+                </div>
+              
+                  </div>
+        </div>
+        <div class="col-md-4
+">
+                  <div class="card">
+        
+                    <div class="banner5"></div>
+                    <ul>
+                      <h2>Nouvelle Demande</h2>
+                      <br><h3>2CS(ISI)</h3>
+                
+                
+                    </ul>
+                    <button class="contact5" id="main-button5">cliquer</button>
+                    <form action="/Ajout" method="POST" class="email-form5">
+                      <input type="text" name="tajout" value="groupe" hidden>
+                      <label for="inputState">Titre</label>
+      <input type="text" name="titre">
+      <label for="inputState">Numero</label>
+                      <select id="inputState" class="form-control" name='numero'>
+                        <option selected>Groupe...</option>
+                        <% for (var i=0;i< groupe.length;i++){%>
+                            <% if(groupe[i].promo.promo=="2CS(ISI)") {%>
+                        <option style="color: black;"><%= groupe[i].numero%></option>
+                        <%}%>
+                               
+                                <% }%> 
+                      </select>
+                      <input type="text" value="<%=promo2CS_ISI.id%>" name="promo" hidden>
+                      
+                      <button type="submit" class="contact5" >Submit</button>
+                    </form>
+                   
+                      
+                                
+                  
+                           <div class="col-sm">
+                                <section id="ajout">
+                                
+                              
+                   
+                 
+                            </form>
+                        </div>
+                      
+                          </div>
+        </div>
+        <div class="col-md-4
+">
+                          <div class="card">
+        
+                            <div class="banner6"></div>
+                            <ul>
+                              <h2>Nouvelle Demande</h2>
+                              <br><h3>3CS(SIW)</h3>
+                        
+                        
+                            </ul>
+                            <button class="contact6" id="main-button6">cliquer</button>
+                            <form action="/Ajout" method="POST" class="email-form6">
+                              <input type="text" name="tajout" value="groupe" hidden>
+                              <label for="inputState">Titre</label>
+                              <input type="text" name="titre">
+                              <label for="inputState">Numero</label>
+                              <select id="inputState" class="form-control" name='numero'>
+                                <option selected>Groupe...</option>
+                                <% for (var i=0;i< groupe.length;i++){%>
+                                    <% if(groupe[i].promo.promo=="3CS(SIW)") {%>
+                                <option style="color: black;"><%= groupe[i].numero%></option>
+                                <%}%>
+                                       
+                                        <% }%> 
+                              </select>
+                              <input type="text" value="<%=promo3CS_SIW.id%>" name="promo" hidden>
+                              
+                              <button type="submit" class="contact6" >Submit</button>
+                            </form>
+                           
+                              
+                                        
+                          
+                                   <div class="col-sm">
+                                        <section id="ajout">
+                                        
+                                      
+                           
+                         
+                                    </form>
+                                </div>
+                              
+                                  </div>
+        </div>
+        <div class="col-md-4
+">
+                                  <div class="card">
+        
+                                    <div class="banner7"></div>
+                                    <ul>
+                                      <h2>Nouvelle Demande</h2>
+                                      <br><h3>3CS(ISI)</h3>
+                                
+                                
+                                    </ul>
+                                    <button class="contact7" id="main-button7">cliquer</button>
+                                    <form action="/Ajout" method="POST" class="email-form7">
+                                      <input type="text" name="tajout" value="groupe" hidden>
+                                      <label for="inputState">Titre</label>
+      <input type="text" name="titre">
+      <label for="inputState">Numero</label>
+                                      <select id="inputState" class="form-control" name='numero'>
+                                        <option selected>Groupe...</option>
+                                        <% for (var i=0;i< groupe.length;i++){%>
+                                            <% if(groupe[i].promo.promo=="3CS(ISI)") {%>
+                                        <option style="color: black;"><%= groupe[i].numero%></option>
+                                        <%}%>
+                                               
+                                                <% }%> 
+                                      </select>
+                                      <input type="text" value="<%=promo3CS_ISI.id%>" name="promo" hidden>
+                                      
+                                      <button type="submit" class="contact7" >Submit</button>
+                                    </form>
+                                   
+                                      
+                                                
+                                  
+                                           <div class="col-sm">
+                                                <section id="ajout">
+                                                
+                                              
+                                   
+                                 
+                                            </form>
+                                        </div>
+                                      
+                                          </div>
+                                          </div>
+   
+                                          </div>
+                                        </div>
+        <script src="user.js"></script>
+        
 
+         </body> 
+</html>
 
 
 
