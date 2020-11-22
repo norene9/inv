@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <%- include('header'); -%>
+        <link rel="stylesheet" href="profile.css">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <div class="main-body">
+            
+                  
+                  
+                  <!-- /Breadcrumb -->
+            
+                  <div class="row gutters-sm">
+                    <div class="col-md-4 mb-3">
+                      <div class="card">
+                          <div class="card-header">
+                            <i class="far fa-user" style="margin-left: 40%;"></i>
+                          </div>
+                        <div class="card-body">
+                          <div class="d-flex flex-column align-items-center text-center">
+                            
+                            <div class="mt-3">
+                            
+                              
+                              <button class="btn btn-primary" style="margin-top: 50%;" data-toggle="modal" data-target="#change">Change password</button>
+                            
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                     
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card mb-3">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <h6 class="mb-0">Nom</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                             <%=user.lastName%>
+                            </div>
+                          </div>
+                          <hr>
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <h6 class="mb-0">Prenom</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                              <%=user.firstName%>
+                            </div>
+                          </div>
+                          <hr>
+                          <hr>
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                              <%=user.email%>
+                            </div>
+                          </div>
+                         
+                        
+                       
+                        </div>
+                      </div>
+                      <div class="row gutters-sm">
+                        
+                       
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal fade" id="change" role="dialog">
+                    <div class="modal-dialog modal-sm">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5> Edit Password :  </h5>
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                        <form action="/change" method="POST">
+                        <div class="modal-body">
+                          
+                          <input type="text" name="id" value="<%=user.id %>" hidden>
+                          <input type="text"  class="form-control" name="pass">
+                        </div>
+                        <div class="modal-footer">
+                          <button type="submit" class="btn btn-default" >save</button>
+                        </div>
+                      </div>
+                    
+                    </div>
+                  </form>
+                  </div>
+            </div>
+        
+  
+    </body>
+</html>

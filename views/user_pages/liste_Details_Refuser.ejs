@@ -1,6 +1,31 @@
 <html>
     <head>
-        <%- include('header'); -%>
+        <nav class="navbar navbar-expand-sm  sticky-top" style="background-color:#628B8B;">
+            <!-- Brand -->
+            <img src="/images/logo.png" width="30px">
+          
+            <!-- Links -->
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="/user" style="color: white;"><b>Home</b></a>
+              </li>
+             
+              <!-- Dropdown -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown" style="color: white;"> <b>Demande</b></a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="/user" style="color: black;"><b>Nouvelle</b></a>
+                  <a class="dropdown-item" href="/Liste_demande_Ens" style="color: black;"><b>Liste des demande</b></a>
+                  
+                  
+                </div>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/logout" style="color: white;"> <b>Logout</b></a>
+                </li>
+              
+            </ul>
+          </nav>
     </head>
     <body>
         <div class="Card">

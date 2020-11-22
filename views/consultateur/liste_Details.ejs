@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <%- include('header'); -%>
+    </head>
+    <body>
+        <div class="container">
+           
+            <div class="row">
+                
+                <h6>Bon de Commande Details</h6>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td scope="row">#</td>
+                            <td scope="row">Matrial</td>
+                            <td scope="row">Details</td>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(var i=0;i< demande.length;i++){%>
+                            <% if (demande.length!==0){%>
+                        <tr>
+                            <td><%=i%></td>
+                            <td><%=demande[i].composant.name%></td>
+                            <td><%=demande[i].quantity%></td>
+                            
+                        </tr>
+                        <%}%>
+                        <%}%>
+                </tbody>
+            </table>
+            </div>
+            <div class="container">
+                <div class="row">
+                    
+                        <form  action="/etat/<%=bcId%>" method="POST" >
+                            <div class="col-sm-2">
+                            <input type="text" name="etat"  value="valide-att" hidden>
+                            
+                            <input type="text" value="<%=bcId%>" name="bcId" hidden>
+                            <button type="submit" class="btn btn-success">Valider</button>
+                            </div>
+
+                        </form>
+                      
+                    <div class="col-sm-2">
+                        <form action="/etat/<%=bcId%>"" method="POST">
+                        <input type="text" value="refuser" name="etat" hidden>
+                            <input type="text" value="<%=bcId%>" name="bcId" hidden>
+                       
+                            <button type="submit" class="btn btn-danger">Rejeter</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+             
+        
+              
+          
+              </div>
+        </div>
+    </body>
+</html>

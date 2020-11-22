@@ -1,7 +1,16 @@
 var express = require('express');
+const nodemailer = require("nodemailer");
 var bodyParser = require('body-parser')
 var router = express.Router(); 
 var dialog = require('dialog');
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'nnours180@gmail.com',
+    pass: 'hichiron9991' // naturally, replace both with your real credentials or an application-specific password
+  }
+});
+
 const { Composants } = require('../sequelize');
 const { Users } = require('../sequelize');
 const {TypeUser} = require('../sequelize');
@@ -43,6 +52,8 @@ router.get('/',async  function(req, res, next) {
       
       console.log(req.isAuthenticated())
 res.redirect('/login')
+    }else{
+      res.redirect('/login')
     }
   
   }catch(err){
@@ -64,7 +75,7 @@ router.get('/logout',function(req,res){
   res.redirect('/login')
 })
  
- //================login=================//
+ //================login Function=================//
  var loggedin=function(req,res,next){
    console.log(req.user)
    if(req.isAuthenticated()){
@@ -77,6 +88,7 @@ router.get('/logout',function(req,res){
      res.redirect('/login')
    }
  }
+ //==========GET USER==========================//
  router.get('/user',loggedin,async function(req,res,next){
    //console.log(req.session.passport.user)
   console.log(req.user.id)
@@ -102,10 +114,7 @@ router.get('/logout',function(req,res){
   if (type.typeu=='Enseignant'){
     try{
     console.log(req.isAuthenticated())
-    //console.log(req.session.passport.user)
-
-    //console.log(req.user.id)
-    //var bcommande =await Bc.create({userId:req.session.passport.user})
+    
 var promo2CPI=await Promo.findOne({where:{promo:'2CPI'}})
 var promo1CPI=await Promo.findOne({where:{promo:'1CPI'}})
 var promo1CS=await Promo.findOne({where:{promo:'1CS'}})
@@ -118,7 +127,52 @@ var groupe=await Groups.findAll({include:[Promo]})
   }catch(err){next(err)}
     
   }
+  if (type.typeu=='Consultateur'){
+    res.redirect('/liste_demandec')
+  }
  })
+ //======================Forget password=============//
+ router.get('/forget_password',async function(req,res,next){
+   res.render('forget_password')
+ })
+ router.post('/forget_password',async function(req,res,next){
+   try{
+    var user= await Users.findOne({where:{email:req.body.email}})
+    var email=req.body.email
+        const mailOptions = {
+          from: 'nnours180@gmail.com',
+          to: user.email,
+          subject: 'Pssword',
+          text: 'Your password in the inventory website is:'+user.password
+        };
+        transporter.sendMail(mailOptions, function(error, info){
+          if (error) {
+          console.log(error);
+          } else {
+            console.log('Email sent: ' + info.response);
+          }
+        });
+        dialog.info('Verifier votre email.... ', function(exitCode) {
+          if (exitCode == 0) res.redirect('/login')
+      })
+   }catch(err){
+next(err)
+   }
+  
+  
+})
+router.get('/profile',async function(req,res,next){
+  var user=await Users.findOne({where:{id:req.user.id},include:[TypeUser]})
+  res.render('Profile',{user})
+})
+router.get('/profileu',async function(req,res,next){
+  var user=await Users.findOne({where:{id:req.user.id},include:[TypeUser]})
+  res.render('./user_pages/profileu',{user})
+})
+router.post('/change',async function(req,res,next){
+  await Users.update({password:req.body.pass},{where:{id:req.body.id}})
+  res.redirect('logout')
+})
 
 router.get('/Demande',async function(req,res,next){
   try{
@@ -187,17 +241,20 @@ next(err)
     //========================Liste des Demande===========///////
     router.get('/liste_demande',async function(req,res,next){
  
-     /*var demande=await Bc.findAll({
-      include: [
-        {model:Bc_Content}, 
-        {model: Composants},
-        {model: Promo},],
-      attributes: ['id','quantity'], 
-    })*/
+    
     var demande=await Bc.findAll({include:[Promo]})
     
       res.render('liste_demande',{demande})
     })
+    //===========liste demande pour consultateur=========//
+    router.get('/liste_demandec',async function(req,res,next){
+ 
+    
+      var demande=await Bc.findAll({include:[Promo]})
+      
+        res.render('./consultateur/liste_demande',{demande})
+      })
+      //=============liste details pour admin===//
     router.get('/liste_Details/:id',async function(req,res,next){
  
       var demande=await Bc_Content.findAll({where:{bcId:req.params.id},
@@ -212,6 +269,22 @@ next(err)
      var bcId=req.params.id
        res.render('liste_Details',{demande,bcId})
      })
+     //=============liste details pour consultateur============///
+     router.get('/liste_Detailsc/:id',async function(req,res,next){
+ 
+      var demande=await Bc_Content.findAll({where:{bcId:req.params.id},
+       include: [
+        
+         {model: Composants},
+         {model: Promo},
+        ],
+       attributes: ['id','quantity'], 
+     })
+     
+     var bcId=req.params.id
+       res.render('./consultateur/liste_Details',{demande,bcId})
+     })
+     //===========liste valide pour admin==//////////
      router.get('/liste_valide/:id',async function(req,res,next){
  
       var demande=await Bc_Content.findAll({where:{bcId:req.params.id},
@@ -226,6 +299,22 @@ next(err)
      var bcId=req.params.id
        res.render('liste_Valide',{demande,bcId})
      })
+     //===========liste valide pour consultateur==//////////
+     router.get('/liste_validec/:id',async function(req,res,next){
+ 
+      var demande=await Bc_Content.findAll({where:{bcId:req.params.id},
+       include: [
+        
+         {model: Composants},
+         {model: Promo},
+        ],
+       attributes: ['id','quantity'], 
+     })
+     
+     var bcId=req.params.id
+       res.render('./consultateur/liste_Valide',{demande,bcId})
+     })
+       //============liste valide pour admin==//
      router.post('/liste_valide',async function(req,res,next){
        try{
         if(req.body.quantity_r==req.body.composantQuantity){
@@ -251,6 +340,32 @@ next(err)
        }
     
      })
+     //============liste valide pour consultateur==//
+     router.post('/liste_validec',async function(req,res,next){
+      try{
+       if(req.body.quantity_r==req.body.composantQuantity){
+         var bc=await Bc_Content.findOne({where:{id:req.body.idc}})
+         bcId=bc.bcId;
+         await Composants.increment('quantity',{by:req.body.quantity_r,where:{id:bc.composantId}})
+         await Composants.increment('quantity_dispo',{by:req.body.quantity_r,where:{id:bc.composantId}})
+         await Bc_Content.destroy({where:{id:req.body.idc}})
+         res.redirect('/liste_validec/'+bcId)
+       }else{
+         var b=await Bc_Content.findOne({where:{id:req.body.idc}})
+         var bc=await Bc.findOne({where:{id:b.bcId}})
+         var chef= await Chefs.findOne({where:{teamId:bc.teamId}})
+         await Composants.increment('quantity_dispo',{by:req.body.quantity_r,where:{id:b.composantId}})
+         var quantity_lost=parseInt(req.body.composantQuantity)-parseInt(req.body.quantity_r)
+         await Composants.decrement('quantity',{by:quantity_lost,where:{id:b.composantId}})
+         console.log(parseInt(quantity_lost))
+ await N_retourne.create({quantity:quantity_lost,composantId:req.body.composantId,chefId:chef.id,etudiantId:chef.etudiantId})
+ res.redirect('/liste_validec/'+bc.id)
+       }
+      }catch(err){
+        next(err)
+      }
+   
+    })
      router.get('/etDette',async function(req,res,next){
        try{
         var etudiant=await N_retourne.findAll({include:[{model:Etudiants},{model:Chefs},{model:Composants}]})
@@ -258,6 +373,14 @@ next(err)
        }catch(err){next(err)}
 
      })
+     //============eDette pour consultateur==///////
+     router.get('/etDettec',async function(req,res,next){
+      try{
+       var etudiant=await N_retourne.findAll({include:[{model:Etudiants},{model:Chefs},{model:Composants}]})
+       res.render('./consultateur/etDette',{etudiant})
+      }catch(err){next(err)}
+
+    })
      router.post('/Edit_valide',async function(req,res,next){
        try{
          if(req.body.qretourner==req.body.qretourner){N_retourne.destroy({where:{id:req.body.renid}})}
@@ -270,6 +393,19 @@ next(err)
          next(err)
        }
      })
+     //============edit valide pour consultateur==//
+     router.post('/Edit_validec',async function(req,res,next){
+      try{
+        if(req.body.qretourner==req.body.qretourner){N_retourne.destroy({where:{id:req.body.renid}})}
+       await N_retourne.decrement('quantity',{by:req.body.qretourner,where:{id:req.body.renid}})
+       await Composants.increment('quantity',{by:req.body.qretourner,where:{id:req.body.composantId}})
+       await Composants.increment('quantity_dispo',{by:req.body.qretourner,where:{id:req.body.composantId}})
+       res.redirect('./consultateur/etDette')
+       
+      }catch(err){
+        next(err)
+      }
+    })
      router.post('/etat/:id',async function(req,res,next){
        try{
             if(req.body.etat=='valide-att'){
@@ -290,6 +426,26 @@ next(err)
        }
    
      })
+     router.post('/etatc/:id',async function(req,res,next){
+      try{
+           if(req.body.etat=='valide-att'){
+       await Bc.update({etat:'valide-en-attente'},{where:{id:req.params.id}})
+        res.redirect('/liste_Detailsc/'+req.params.id)
+      }else
+      if(req.body.etat=='refuser'){
+      await Bc.update({etat:'refuser'},{where:{id:req.params.id}})
+       res.redirect('/liste_Detailsc/'+req.params.id)
+     }
+     else
+      if(req.body.etat=='valide'){
+       await Bc.update({etat:'valide'},{where:{id:req.params.id}})
+       res.redirect('/liste_Detailsc/'+req.params.id)
+     }
+      }catch(err){
+        next(err)
+      }
+  
+    })
      router.get('/Confirmer/:id',async function(req,res,next){
       var bc=await Bc.findOne({where:{id:req.params.id}})
       Bc.update({etat:'valide'},{where:{id:bc.id}})
@@ -317,10 +473,7 @@ res.render('./user_pages/liste_Details_Refuser',{demande,bcId})
        res.redirect('/Liste_demande_Ens')
 
      })
- /*router.get('/user/:id',async function(req,res,next){
-var user =await Users.findOne({where:{id:req.params.id}})
-  res.render('./user_pages/index',{user})
-})*/
+
  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>GESTION DE STOCK<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
  //------------------------------Nomoclature-----------------------------
    //======================Add Equipement (Nomoclature)=============//
@@ -628,6 +781,19 @@ router.post('/Delete_BL',urlencodedParser,async  function(req, res, next) {
           }catch(err){next(err)}
           
         })
+        router.get('/Dechargec/:id',async function(req,res,next){
+          try{
+            var demande=await Bc_Content.findAll({where:{bcId:req.params.id},include:[Composants]})
+          
+          var bc=await Bc.findOne({where:{id:req.params.id},include:[Promo]})
+          var team=await Groups.findOne({where:{id:bc.teamId}})
+          var use=await Users.findOne({where:{id:bc.userId}})
+          console.log(use.firstName,'llllllllllllllllllllllllllllllllllll')
+          var chef=await Chefs.findOne({include:[{model:Etudiants},{model:Groups}]})
+          res.render('./consultateur/Decharge',{demande,team,chef,bc,use})
+          }catch(err){next(err)}
+          
+        })
         //==================GET GROUPS===================//
         router.get('/find_promo_2CS_SIW',urlencodedParser,async  function(req, res, next) {
           try{
@@ -748,6 +914,20 @@ router.post('/Delete_BL',urlencodedParser,async  function(req, res, next) {
           length: 10,
           numbers: true
       });
+      var email=req.body.email
+      const mailOptions = {
+        from: 'nnours180@gmail.com',
+        to: email,
+        subject: 'Pssword',
+        text: 'Your password in the inventory website is'+password
+      };
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+        console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
    await TypeUser.findOne({where:{typeu:req.body.typeid}}).then(( async type=>{
     await Users.create({firstName:req.body.nom,lastName:req.body.prenom,email:req.body.email,password:password,typeUserId:type.id})
    }))
@@ -779,24 +959,7 @@ router.post('/Delete_BL',urlencodedParser,async  function(req, res, next) {
           }
       });
      
-  //===================    
-         
-    /*  router.get('/login',(req,res,next)=>{
-        res.render('login')
-      }) 
-      router.post('/login',async function(req,res,next){
-        try{
-          await Users.findOne({where:{email:req.body.email}}).then( async user=>{
-            if(user==null){return res.json({status:'error',message:'email not exist'})}
-            if(user.password!==req.body.password){return res.json({status:'error',message:'password not correct'})}
-            //return res.json({status:'ok'})
-            res.render('index')
-          })
-        }catch(err){
-          next(err)
-        }
-       
-      }) */  
+  
                
 
 
