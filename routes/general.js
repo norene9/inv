@@ -6,8 +6,8 @@ var dialog = require('dialog');
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'nnours180@gmail.com',
-    pass: 'hichiron9991' // naturally, replace both with your real credentials or an application-specific password
+    user: 'PUT YOUR OWN MAIL',
+    pass: 'YOUR PASSWORD' 
   }
 });
 
@@ -140,7 +140,7 @@ var groupe=await Groups.findAll({include:[Promo]})
     var user= await Users.findOne({where:{email:req.body.email}})
     var email=req.body.email
         const mailOptions = {
-          from: 'nnours180@gmail.com',
+          from: 'YOUR MAIL',
           to: user.email,
           subject: 'Pssword',
           text: 'Your password in the inventory website is:'+user.password
